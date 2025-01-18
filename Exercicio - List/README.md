@@ -1,18 +1,5 @@
-## Getting Started
-
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
-
-## Folder Structure
-
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+# Exercicio proposto sobre List referente ao módulo "Comportamento de memória, arrays, listas" do curso: Java COMPLETO Programação Orientada a Objetos + Projetos, da Udemy.
+1. O usuário irá dizer quantas pessoas/funcionários quer cadastrar.
+2. Após isso, cadastrará id, nome e salário dessas pessoas. O id é unico, duas pessoas não podem ter o mesmo id.
+3. O usuário terá que inserir qual dos funcionários ele quer escolher para dar um aumento e com isso irá inserir o id e a porcentagem do aumento. Caso um id errado seja inserido, o programa "para".
+4. Mostre todos os dados de todos os funcionários cadastrados.
