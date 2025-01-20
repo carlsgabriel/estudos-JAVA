@@ -1,4 +1,4 @@
-# Exercicio de fixação referente ao módulo "Comportamento de memória, arrays, listas" do curso: Java COMPLETO Programação Orientada a Objetos + Projetos, da Udemy.
+# Exercicio de fixação sobre vetor referente ao módulo "Comportamento de memória, arrays, listas" do curso: Java COMPLETO Programação Orientada a Objetos + Projetos, da Udemy.
 
 1. Um vetor de 10 posições será criado para representar um hotel, onde o vetor é o hotel e as posições são os quartos.
 2. O usuário deve inserir no programa quantas pessoas ele quer cadastrar, além de seus nomes, emails e números do quarto.
