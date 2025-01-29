@@ -1,18 +1,4 @@
-## Getting Started
+# Exercicio de fixação sobre os seguintes assuntos: data-hora, enumeração, composição e StringBuilder(). Exercicio referente aos módulos "Tópicos especiais em Java: data-hora" e "Enumeração, composição"  do curso: Java COMPLETO Programação Orientada a Objetos + Projetos, da Udemy.
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
-
-## Folder Structure
-
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+![Image](https://github.com/user-attachments/assets/56dd9928-3910-4268-a06f-4e34fdcea714)
+![Image](https://github.com/user-attachments/assets/2b67b9e5-c97e-4a78-ae50-610c4332b8db)
