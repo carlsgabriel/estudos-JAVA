@@ -45,6 +45,8 @@ public class App {
         }
 
         System.out.println(order);
+
+        scan.close();
         
     }
 }
