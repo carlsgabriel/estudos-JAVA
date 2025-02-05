@@ -1,4 +1,4 @@
-# Exercicio de fixação sobre os seguintes assuntos: Herança e polimorfismo. Exercicio referente ao módulos "Herança e polimorfismo" do curso: Java COMPLETO Programação Orientada a Objetos + Projetos, da Udemy.
+# Exercicio de fixação sobre os seguintes assuntos: Herança e polimorfismo. Exercicio referente ao módulo "Herança e polimorfismo" do curso: Java COMPLETO Programação Orientada a Objetos + Projetos, da Udemy.
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/9589a31d-67ee-4c39-aa0f-4e632b8f0d41" width="45%" />
