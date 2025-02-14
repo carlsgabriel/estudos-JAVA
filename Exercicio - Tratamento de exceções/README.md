@@ -1,18 +1,7 @@
-## Getting Started
+# Exercicio de fixação sobre tratamento de exceções referente ao módulo "Tratamento de exceções" do curso: Java COMPLETO Programação Orientada a Objetos + Projetos, da Udemy.
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
-
-## Folder Structure
-
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/cbdf77d9-4ef1-45ee-8a33-ad19c63c29c6" width="33%" />
+  <img src="https://github.com/user-attachments/assets/88bd9636-e1ab-49a3-860b-4321edd44644" width="33%" />
+  <img src="https://github.com/user-attachments/assets/83a9deae-2cee-41d2-a551-c752aa1945c8" width="33%" />
+</p>
