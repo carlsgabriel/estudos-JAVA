@@ -4,6 +4,10 @@ public class MainExercicio02 {
 
     public static void main(String[] args) {
 
+        /*Crie uma classe ContaBancaria com atributos titular e saldo e métodos para depositar e sacar. 
+        Depois, crie a classe ContaPoupanca que herda de ContaBancaria, adicionando um método para calcular juros.
+        Crie uma conta e simule um depósito e um cálculo de juros.*/
+
         Scanner scan = new Scanner(System.in);
 
         System.out.print("Insira o nome do titular da conta: ");
