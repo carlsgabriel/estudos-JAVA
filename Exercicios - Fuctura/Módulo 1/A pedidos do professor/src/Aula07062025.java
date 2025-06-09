@@ -96,7 +96,7 @@ public class Aula07062025 {
 
         System.out.print(nome + ", faça sua jogada: ");
         numInt1 = scan.nextInt();
-        numInt2 = random.nextInt(1,4);
+        numInt2 = random.nextInt(3)+1;
         System.out.println("Jogada do computador: " + numInt2);
 
         boolean continuar = true;
@@ -119,7 +119,7 @@ public class Aula07062025 {
             } else if (numInt1 == 3 && numInt2 == 2) {
                System.out.println("\nPapel é cortado pela tesoura... " + nome + " venceu.");
                continuar = false;
-            } else {
+            } else if (numInt1 == numInt2) {
               System.out.println("\nMãos iguais, empate.");
 
               System.out.println();
@@ -132,12 +132,15 @@ public class Aula07062025 {
 
               System.out.print(nome + ", faça novamente sua jogada: ");
               numInt1 = scan.nextInt();
-              numInt2 = random.nextInt(1,4);
+              numInt2 = random.nextInt(3)+1;
               System.out.println("Jogada do computador: " + numInt2);
 
               continuar = true;
 
-            }  
+            }  else {
+                System.out.println("\nDados inválidos... reinicie o jogo.");
+                continuar = false;
+            }
         }
 
 	scan.close();
