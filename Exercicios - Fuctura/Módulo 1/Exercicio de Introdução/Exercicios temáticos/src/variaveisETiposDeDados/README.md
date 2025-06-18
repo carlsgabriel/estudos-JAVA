@@ -1,4 +1,4 @@
-# Exercicios de introdução.
+# Exercícios temáticos de variáveis e tipos de dados.
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/c9ce6dd5-ae47-4748-830e-1647e0a6a9ab" width="90%" />
