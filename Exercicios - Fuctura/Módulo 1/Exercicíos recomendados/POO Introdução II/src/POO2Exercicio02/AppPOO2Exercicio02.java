@@ -35,11 +35,9 @@ public class AppPOO2Exercicio02 {
         carro.setCombustivel(tipoCombustivel);
         carro.setOnOff(false);
 
-        System.out.println();
-
         boolean continuar = true;
         do{
-            System.out.println("MENU");
+            System.out.println("\nMENU");
             System.out.println("1. LIGAR O CARRO");
             System.out.println("2. DESLIGAR O CARRO");
             System.out.println("3. ACELERAR O CARRO");
@@ -61,7 +59,7 @@ public class AppPOO2Exercicio02 {
                     System.out.print("Quantidade de combustível a ser abastecido: ");
                     double qtd = scan.nextDouble();
 
-                    System.out.println(carro.abastecer(qtd) + "\n");
+                    System.out.println(carro.abastecer(qtd));
                 }
                 case 6 -> {
                     System.out.println("Saindo do menu...");
@@ -69,6 +67,16 @@ public class AppPOO2Exercicio02 {
                 }
                 default -> System.out.println("Valor inválido.");
             }
+
+            System.out.print("\nDeseja continuar no menu (sim/nao): ");
+            String desejaContinua = scan.nextLine();
+
+            if(desejaContinua.equalsIgnoreCase("sim")){
+                continuar = true;
+            } else {
+                continuar = false;
+            }
+
         } while (continuar != false);
 
         scan.close();

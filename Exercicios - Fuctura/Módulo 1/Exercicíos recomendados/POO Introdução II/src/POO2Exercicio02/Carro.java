@@ -67,18 +67,18 @@ public class Carro {
     public String ligar() {
         if(onOff == false){
             onOff = true;
-            return "Motor do carro acionado.\n";
+            return "Motor do carro acionado.";
         } else {
-            return "O carro já está ligado. \n";
+            return "O carro já está ligado. ";
         }
     }
 
     public String desligar() {
         if(onOff == true){
             onOff = false;
-            return "Desligando motor do carro.\n";
+            return "Desligando motor do carro.";
         } else {
-            return "Motor do carro já está desligado. \n";
+            return "Motor do carro já está desligado. ";
         }
         
     }
@@ -94,7 +94,7 @@ public class Carro {
 
             return sb.toString();
         } else {
-            return "O carro precisa estar ligado para acelerar.\n";
+            return "O carro precisa estar ligado para acelerar.";
         }
     }
 
@@ -109,7 +109,7 @@ public class Carro {
 
             return sb.toString();
         } else {
-            return "O carro precisa estar ligado para efetuar a freagem corretamente.\n";
+            return "O carro precisa estar ligado para efetuar a freagem corretamente.";
         }
         
     }
