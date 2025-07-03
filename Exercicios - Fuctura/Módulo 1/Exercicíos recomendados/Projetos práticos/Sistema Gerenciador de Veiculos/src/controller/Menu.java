@@ -7,11 +7,15 @@ public class Menu {
     Scanner scan = null;
     GerenciarVeiculo gerenciarVeiculo = null;
     GerenciarLoja gerenciarLoja = null;
+    GerenciarCliente gerenciarCliente = null;
+    GerenciarVendedor gerenciarVendedor = null;
 
     public Menu(){
         scan = new Scanner(System.in);
         gerenciarVeiculo = new GerenciarVeiculo();
         gerenciarLoja = new GerenciarLoja();
+        gerenciarVendedor = new GerenciarVendedor();
+        gerenciarCliente = new GerenciarCliente();
     }
 
     public void exibirMenu(){
@@ -75,7 +79,7 @@ public class Menu {
                 }
                 case 2 -> {
                     if(gerenciarLoja.lojas.size() <= 0){
-                        System.out.println("\n" + gerenciarLoja.listarLojas() + "\n");
+                        System.out.println("\nNão há lojas a serem listadas...\n");
                     } else {
                         System.out.println("\n" + gerenciarLoja.listarLojas() + "\n");
 
@@ -90,18 +94,15 @@ public class Menu {
                         scan.nextLine();
 
                         if(opcaoMenuFrenteLoja == 1){
-
+                            System.out.println(gerenciarLoja.listarVeiculos(nomeLoja));
                         } else if (opcaoMenuFrenteLoja == 2){
-
+                            System.out.println(gerenciarLoja.listarVendedores(nomeLoja));
                         } else if (opcaoMenuFrenteLoja == 3){
                             menuFrenteLoja();
                         } else {
                             System.out.println("\nValor inválido.");
                         }
                     }
-                    
-
-                    
                 }
                 case 3 -> {
                     System.out.println("\n1. Consultar vendedor pelo nome");
@@ -111,7 +112,10 @@ public class Menu {
                     scan.nextLine();
 
                     if(opcaoMenuFrenteLoja == 1){
+                        System.out.print("\nNome do vendedor: ");
+                        String nome = scan.nextLine();
 
+                        gerenciarVendedor.consultarVendedor("\n" + nome);
                     } else if (opcaoMenuFrenteLoja == 2){
                         menuFrenteLoja();
                     } else {
@@ -127,9 +131,23 @@ public class Menu {
                     scan.nextLine();
 
                     if(opcaoMenuFrenteLoja == 1){
+                        System.out.println("\nInformaçoes para cadastro de cliente abaixo");
 
+                        System.out.print("Nome: ");
+                        String nome = scan.nextLine();
+
+                        System.out.print("CPF: ");
+                        String cpf = scan.nextLine();
+
+                        System.out.print("Telefone: ");
+                        String telefone = scan.nextLine();
+
+                        System.out.println("\n" + gerenciarCliente.cadastrarClientes(nome, cpf, telefone));
                     } else if (opcaoMenuFrenteLoja == 2){
+                        System.out.print("\nInsira o CPF do cliente: ");
+                        String cpf = scan.nextLine();
 
+                        System.out.println(gerenciarCliente.consultarCliente(cpf));
                     } else if (opcaoMenuFrenteLoja == 3){
                         menuFrenteLoja();
                     } else {

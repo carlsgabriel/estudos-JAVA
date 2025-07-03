@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.Loja;
 import model.Veiculo;
+import model.Vendedor;
 
 public class GerenciarLoja {
 
@@ -27,7 +28,6 @@ public class GerenciarLoja {
         }
     }
 
-    //parei aqui, na parte de listar os veiculos do menu da frente da loja
     public String listarVeiculos(String nomeLoja){
         StringBuilder sb = new StringBuilder();
 
@@ -56,5 +56,33 @@ public class GerenciarLoja {
         
         return sb.toString();
     }
+
+    public String listarVendedores(String nomeLoja){
+        StringBuilder sb = new StringBuilder();
+
+        if(lojas.size() <= 0){
+            return "Não há lojas a serem verificadas.";
+        } else {
+            for(Loja loja : lojas){
+                if(loja.getNome().equalsIgnoreCase(nomeLoja)){
+                    if(loja.getVendedores().size() <= 0){
+                        return "Não há vendedores associados à essa loja.";
+                    } else {
+                        for(Vendedor vendedor : loja.getVendedores()){
+                            sb.append("Vendedores disponíveis: \n");
+                            sb.append("\nNome: " + vendedor.getNome() + "\n");
+                            sb.append("CPF: " + vendedor.getCPF() + "\n");
+                            sb.append("Telefone: " + vendedor.getTelefone() + "\n");
+                        }
+                    }
+                } else {
+                    return "Não há lojas com o nome inserido.";
+                }
+            }
+        }
+        
+        return sb.toString();
+    }
+
 }
 
