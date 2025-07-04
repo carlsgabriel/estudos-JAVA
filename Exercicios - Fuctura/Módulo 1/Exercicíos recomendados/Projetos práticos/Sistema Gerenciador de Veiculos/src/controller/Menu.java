@@ -83,7 +83,7 @@ public class Menu {
                     if(gerenciarLoja.lojas.size() <= 0){
                         System.out.println("\nNão há lojas a serem listadas...");
                     } else {
-                        System.out.println("\n" + gerenciarLoja.listarLojas() + "\n");
+                        System.out.println("\n" + gerenciarLoja.listarLojas());
 
                         System.out.print("Escolha o nome da loja ao qual você quer selecionar: ");
                         String nomeLoja = scan.nextLine();
@@ -96,9 +96,9 @@ public class Menu {
                         scan.nextLine();
 
                         if(opcaoMenuFrenteLoja == 1){
-                            System.out.println(gerenciarLoja.listarVeiculos(nomeLoja));
+                            System.out.println("\n" + gerenciarLoja.listarVeiculos(nomeLoja));
                         } else if (opcaoMenuFrenteLoja == 2){
-                            System.out.println(gerenciarLoja.listarVendedores(nomeLoja));
+                            System.out.println("\n" + gerenciarLoja.listarVendedores(nomeLoja));
                         } else if (opcaoMenuFrenteLoja == 3){
                             menuFrenteLoja();
                         } else {
@@ -285,15 +285,15 @@ public class Menu {
 
                         System.out.println(gerenciarVeiculo.alterarDados(placa, marca, modelo, ano, placaNova, preco));
                     } else if (opcaoMenuCadastro == 4){
-                        System.out.println(gerenciarVeiculo.listarVeiculos());
+                        System.out.println("\n" + gerenciarVeiculo.listarVeiculos());
                         System.out.print("Insira o a placa do veículo que você quer associar a uma loja: ");
                         String placa = scan.nextLine();
 
-                        System.out.println(gerenciarLoja.listarLojas());
+                        System.out.println("\n" + gerenciarLoja.listarLojas());
                         System.out.print("Insira o nome da loja ao qual você quer associar o carro: ");
                         String nomeLoja = scan.nextLine();
 
-                        System.out.println(gerenciarVeiculo.associarVeiculo(placa, nomeLoja));
+                        System.out.println("\n" + gerenciarVeiculo.associarVeiculo(placa, nomeLoja));
                     } else if (opcaoMenuCadastro == 5){
                         menuCadastro();
                     } else {
@@ -301,14 +301,28 @@ public class Menu {
                     }
                 }
                 case 2 -> {
-                    System.out.println("\n1. Alterar dados da loja");
-                    System.out.println("2. Associar vendedor a loja");
-                    System.out.println("3. Voltar para o menu anterior");
+                    System.out.println("\n1. Cadastrar loja");
+                    System.out.println("2. Excluir loja");
+                    System.out.println("3. Alterar dados da loja");
+                    System.out.println("4. Associar vendedor a loja");
+                    System.out.println("5. Voltar para o menu anterior");
                     System.out.print("Opção desejada: ");
                     opcaoMenuCadastro = scan.nextInt();
                     scan.nextLine();
 
                     if(opcaoMenuCadastro == 1){
+                        System.out.println("\n[DADOS PARA CADASTRO DA LOJA]");
+
+                        System.out.print("Nome: ");
+                        String nome = scan.nextLine();
+
+                        System.out.print("Endereço: ");
+                        String endereco = scan.nextLine();
+
+                        System.out.print("Telefone: ");
+                        String telefone = scan.nextLine();
+
+                        System.out.println("\n" + gerenciarLoja.cadastrarLoja(nome, endereco, telefone));
 
                     } else if (opcaoMenuCadastro == 2){
 

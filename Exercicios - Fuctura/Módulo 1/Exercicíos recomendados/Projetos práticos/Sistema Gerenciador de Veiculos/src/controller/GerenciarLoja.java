@@ -17,7 +17,7 @@ public class GerenciarLoja {
         } else {
             StringBuilder sb = new StringBuilder();
 
-            sb.append("Lojas cadastradas: \n");
+            sb.append("[LOJAS CADASTRADAS] \n");
             for(Loja loja : lojas){
                 sb.append("\nNome: " + loja.getNome() + "\n");
                 sb.append("Endereço: " + loja.getEndereco() + "\n");
@@ -84,5 +84,20 @@ public class GerenciarLoja {
         return sb.toString();
     }
 
-}
+    public String cadastrarLoja(String nome, String endereco, String telefone){
+        lojas.add(new Loja(nome, endereco, telefone));
 
+        String cadastro = "";
+        for(Loja loja : lojas){
+            if(loja.getNome().equalsIgnoreCase(nome)){
+                cadastro = "Loja adicionado com sucesso.";
+                return cadastro;
+            } else {
+                cadastro = "A loja não foi adicionada.";
+            }
+        }
+
+        return cadastro;
+    }
+
+}

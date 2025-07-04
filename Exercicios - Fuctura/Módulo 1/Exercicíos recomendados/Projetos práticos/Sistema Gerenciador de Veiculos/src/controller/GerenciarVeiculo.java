@@ -118,43 +118,73 @@ public class GerenciarVeiculo {
 
     public String associarVeiculo(String placa, String nomeLoja){
 
-        String associar = "";
+        // Código antigo que não tava conseguindo fazer o que tinha que ser feito.
+
+        // String associar = "";
+        // Veiculo veiculo = null;
+        // for(Veiculo v : veiculos){
+        //     if(veiculos.size() > 0){
+        //         if(v.getPlaca().equalsIgnoreCase(placa)){
+        //             veiculo = v;
+        //             break;
+        //         } else {
+        //             associar = "Não há veiculo com essa placa.";
+        //         }
+        //     } else {
+        //         associar =  "Não há veiculos a serem associados.";
+        //     } 
+        // }
+
+        // Loja loja = null;
+        // for(Loja l : gerenciarLoja.lojas){
+        //     if(gerenciarLoja.lojas.size() > 0){
+        //         if(l.getNome().equalsIgnoreCase(nomeLoja)){
+        //             loja = l;
+        //             break;
+        //         } else {
+        //             associar = "Não loja com esse nome.";
+        //         }
+        //     } else {
+        //         associar =  "Não há lojas para receberem essa associação.";
+        //     } 
+        // }
+
+        // loja.adicionarVeiculos(new Veiculo(veiculo.getMarca(), veiculo.getModelo(), veiculo.getAno(), veiculo.getPlaca(), veiculo.getPreco()));
+
+        // return associar;
+
+
+
+        // Tive que recorrer ao chat gpt porque não tava conseguindo fazer o código acima de jeito nenhum...
+        // Eis o código que o chatgpt sugeriu:
         Veiculo veiculo = null;
-        for(Veiculo v : veiculos){
-            if(veiculos.size() > 0){
-                if(v.getPlaca().equalsIgnoreCase(placa)){
-                    veiculo = v;
-                } else {
-                    associar = "Não há veiculo com essa placa.";
-                }
-            } else {
-                associar =  "Não há veiculos a serem associados.";
-            } 
+        for(Veiculo vei : veiculos){
+            if(vei.getPlaca().equalsIgnoreCase(placa)){
+                veiculo = vei;
+                break;
+            }
+        }
+
+        if(veiculo == null){
+            return "Veiculo com placa informada não foi encontrado.";
         }
 
         Loja loja = null;
         for(Loja l : gerenciarLoja.lojas){
-            if(gerenciarLoja.lojas.size() > 0){
-                if(l.getNome().equalsIgnoreCase(nomeLoja)){
-                    loja = l;
-                } else {
-                    associar = "Não há loja com esse nome.";
-                }
-            } else {
-                associar =  "Não há lojas para receberem essa associação.";
-            } 
-        }
-
-        loja.adicionarVeiculos(veiculo);
-        for(Veiculo v : loja.getVeiculos()){
-            if(v.getPlaca().equalsIgnoreCase(veiculo.getPlaca())){
-                associar = "Associação realizada com sucesso.";
-            } else {
-                associar = "Associação falhou.";
+            if(l.getNome().equalsIgnoreCase(nomeLoja)){
+                loja = l;
             }
         }
 
-        return "\n" + associar;
+        if(loja == null){
+            return "Loja com nome informado não foi encontrada.";
+        }
+
+        loja.adicionarVeiculos(veiculo);
+        return "Veiculo associado à loja com sucesso.";
+        //Entendi que tinha que verificar se o veiculo e a loja estavam nulos antes de tentar adicionar um ao outro... porém por algum motivo loja ainda está vindo nulo.
+        //Erros possíveis:
+        //1. A litsa de lojas da instância de gerenciarLoja que é criada aqui não tem nada adicionada a ela. Ela é totalemnte diferente da lista de lojas da instancia na classe Gerenciar loja.
 
     }
 
