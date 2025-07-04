@@ -43,4 +43,8 @@ public class GerenciarCliente {
         }
     }
 
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
 }

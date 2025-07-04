@@ -28,4 +28,8 @@ public class GerenciarVendedor {
         }
     }
 
+    public List<Vendedor> getVendedores() {
+        return vendedores;
+    }
+
 }
