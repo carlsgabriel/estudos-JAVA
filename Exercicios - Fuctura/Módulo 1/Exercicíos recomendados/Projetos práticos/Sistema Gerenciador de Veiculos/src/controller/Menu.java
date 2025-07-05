@@ -80,31 +80,30 @@ public class Menu {
                     }
                 }
                 case 2 -> {
-                    if(gerenciarLoja.lojas.size() <= 0){
-                        System.out.println("\nNão há lojas a serem listadas...");
-                    } else {
                         System.out.println("\n" + gerenciarLoja.listarLojas());
-
-                        System.out.print("Escolha o nome da loja ao qual você quer selecionar: ");
-                        String nomeLoja = scan.nextLine();
-
-                        System.out.println("\n1. Listar veículos disponíveis na loja");
-                        System.out.println("2. Listar vendedores da loja");
-                        System.out.println("3. Voltar para o menu anterior");
-                        System.out.print("Opção desejada: ");
-                        opcaoMenuFrenteLoja = scan.nextInt();
-                        scan.nextLine();
-
-                        if(opcaoMenuFrenteLoja == 1){
-                            System.out.println("\n" + gerenciarLoja.listarVeiculos(nomeLoja));
-                        } else if (opcaoMenuFrenteLoja == 2){
-                            System.out.println("\n" + gerenciarLoja.listarVendedores(nomeLoja));
-                        } else if (opcaoMenuFrenteLoja == 3){
-                            menuFrenteLoja();
+                        if(gerenciarLoja.listarLojas().length() < 40){
+                            break;
                         } else {
-                            System.out.println("\nValor inválido.");
-                        }
-                    }
+                            System.out.print("Escolha o nome da loja ao qual você quer selecionar: ");
+                            String nomeLoja = scan.nextLine();
+
+                            System.out.println("\n1. Listar veículos disponíveis na loja");
+                            System.out.println("2. Listar vendedores da loja");
+                            System.out.println("3. Voltar para o menu anterior");
+                            System.out.print("Opção desejada: ");
+                            opcaoMenuFrenteLoja = scan.nextInt();
+                            scan.nextLine();
+
+                            if(opcaoMenuFrenteLoja == 1){
+                                System.out.println("\n" + gerenciarLoja.listarVeiculos(nomeLoja));
+                            } else if (opcaoMenuFrenteLoja == 2){
+                                System.out.println("\n" + gerenciarLoja.listarVendedores(nomeLoja));
+                            } else if (opcaoMenuFrenteLoja == 3){
+                                menuFrenteLoja();
+                            } else {
+                                System.out.println("\nValor inválido.");
+                            }
+                        }  
                 }
                 case 3 -> {
                     System.out.println("\n1. Consultar vendedor pelo nome");
@@ -325,7 +324,12 @@ public class Menu {
                         System.out.println("\n" + gerenciarLoja.cadastrarLoja(nome, endereco, telefone));
 
                     } else if (opcaoMenuCadastro == 2){
+                        System.out.println("\n" + gerenciarLoja.listarLojas());
 
+                        System.out.print("Insira o nome da loja que você quer excluir: ");
+                        String nomeLoja = scan.nextLine();
+
+                        System.out.println("\n" + gerenciarLoja.excluirLoja(nomeLoja));
                     } else if (opcaoMenuCadastro == 3){
                         menuCadastro();
                     } else {

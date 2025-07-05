@@ -9,7 +9,7 @@ import model.Vendedor;
 
 public class GerenciarLoja {
 
-    List<Loja> lojas = new ArrayList<>();
+    static List<Loja> lojas = new ArrayList<>();
 
     public String listarLojas(){
         if(lojas.size() <= 0){
@@ -98,6 +98,26 @@ public class GerenciarLoja {
         }
 
         return cadastro;
+    }
+
+    public String excluirLoja(String nomeLoja){
+        String excluir = "";
+
+        if(lojas.size() < 0){
+            excluir = "Não há lojas a serem verificadas.";
+        } else {
+            for(Loja loja : lojas){
+                if(loja.getNome().equalsIgnoreCase(nomeLoja)){
+                    lojas.remove(loja);
+                    excluir = "Loja removida com sucesso.";
+                    break;
+                } else {
+                    excluir = "Não há lojas com esse nome.";
+                }
+            }
+        }
+        
+        return excluir;
     }
 
 }
