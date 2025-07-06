@@ -18,7 +18,7 @@ public class GerenciarVendedor {
             Vendedor vendedor = vendedores.stream().filter(x -> x.getNome().equalsIgnoreCase(nomeVendedor)).findFirst().orElse(null);
 
             if(vendedor == null){
-                sb.append("Não há vendedor com esse nome");
+                sb.append("\nNão há vendedor com esse nome");
             } else {
                 sb.append("\n[VENDEDOR]\n");
                 sb.append("Nome: " + vendedor.getNome() + "\n");
@@ -35,14 +35,14 @@ public class GerenciarVendedor {
     }
 
     public String cadastrarVendedor(String nome, String cpf, String telefone){
-        vendedores.add(new Vendedor(nome, cpf, telefone));
-
         Vendedor vendedor = vendedores.stream().filter(x -> x.getCPF().equalsIgnoreCase(cpf)).findFirst().orElse(null);
 
         if(vendedor == null){
-            return "O cadastro não foi realizado.";
-        } else {
-            return "Cadastro realizado com sucesso!";
+            vendedores.add(new Vendedor(nome, cpf, telefone));
+
+            return "\nVendedor cadastrado com sucesso.";
+        }else {
+            return "\nJá existe um vendedor com esse mesmo CPF cadastrado.";
         }
     }
 
@@ -50,32 +50,26 @@ public class GerenciarVendedor {
         Vendedor vendedor = vendedores.stream().filter(x -> x.getCPF().equalsIgnoreCase(cpf)).findFirst().orElse(null);
 
         if(vendedor == null){
-            return "Não há vendedor com esse CPF.";
+            return "\nNão há vendedor com esse CPF.";
         } else {
             vendedores.remove(vendedor);
 
-            return "Vendedor removido com sucesso.";
+            return "\nVendedor removido com sucesso.";
         }
     }
 
     public String alterarDados(String cpf, String nome, String cpfNovo, String telefone){
-        String alterar = "";
-        for(Vendedor vendedor : vendedores){
-            if(vendedores.size() > 0){
-                if(vendedor.getCPF().equalsIgnoreCase(cpf)){
-                    vendedor.setNome(nome);
-                    vendedor.setCPF(cpfNovo);
-                    vendedor.setTelefone(telefone);
-                    alterar = "Dados do vendedor alterados com sucesso.";
-                } else {
-                    alterar = "Os dados do vendedor não foram alterados, pois não há vendedor com esse CPF.";
-                }
-            } else {
-                alterar =  "Não há vendedores a serem alterados.";
-            } 
-        }
+        Vendedor vendedor = vendedores.stream().filter(x -> x.getCPF().equalsIgnoreCase(cpf)).findFirst().orElse(null);
 
-        return "\n" + alterar;
+        if(vendedor == null){
+            return "\nNão existe um vendedor com esse CPF.";
+        } else {
+            vendedor.setNome(nome);
+            vendedor.setCPF(cpfNovo);
+            vendedor.setTelefone(telefone);
+
+            return "\nDados do vendedor alterados com sucesso.";
+        }
     } 
 
 }

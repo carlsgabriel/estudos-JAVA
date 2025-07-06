@@ -103,9 +103,9 @@ public class Menu {
                             scan.nextLine();
 
                             if(opcaoMenuFrenteLoja == 1){
-                                System.out.println("\n" + gerenciarLoja.listarVeiculos(nomeLoja));
+                                System.out.println(gerenciarLoja.listarVeiculos(nomeLoja));
                             } else if (opcaoMenuFrenteLoja == 2){
-                                System.out.println("\n" + gerenciarLoja.listarVendedores(nomeLoja));
+                                System.out.println(gerenciarLoja.listarVendedores(nomeLoja));
                             } else if (opcaoMenuFrenteLoja == 3){
                                 break;
                             } else {
@@ -301,11 +301,16 @@ public class Menu {
                         System.out.print("Insira o a placa do veículo que você quer associar a uma loja: ");
                         String placa = scan.nextLine();
 
-                        System.out.println("\n" + gerenciarLoja.listarLojas());
-                        System.out.print("Insira o nome da loja ao qual você quer associar o carro: ");
-                        String nomeLoja = scan.nextLine();
+                        if(GerenciarLoja.lojas.size() <= 0){
+                            System.out.println("\nNão há lojas cadastradas.");
+                            break;
+                        } else {
+                            System.out.println(gerenciarLoja.listarLojas());
+                            System.out.print("Insira o nome da loja ao qual você quer associar o carro: ");
+                            String nomeLoja = scan.nextLine();
 
-                        System.out.println("\n" + gerenciarVeiculo.associarVeiculo(placa, nomeLoja));
+                            System.out.println("\n" + gerenciarVeiculo.associarVeiculo(placa, nomeLoja));
+                        }
                     } else if (opcaoMenuCadastro == 5){
                         break;
                     } else {
@@ -334,7 +339,7 @@ public class Menu {
                         System.out.print("Telefone: ");
                         String telefone = scan.nextLine();
 
-                        System.out.println("\n" + gerenciarLoja.cadastrarLoja(nome, endereco, telefone));
+                        System.out.println(gerenciarLoja.cadastrarLoja(nome, endereco, telefone));
 
                     } else if (opcaoMenuCadastro == 2){
                         System.out.println("\n" + gerenciarLoja.listarLojas());
@@ -342,7 +347,7 @@ public class Menu {
                         System.out.print("Insira o nome da loja que você quer excluir: ");
                         String nomeLoja = scan.nextLine();
 
-                        System.out.println("\n" + gerenciarLoja.excluirLoja(nomeLoja));
+                        System.out.println(gerenciarLoja.excluirLoja(nomeLoja));
                     } else if (opcaoMenuCadastro == 3){
                         System.out.println("\n" + gerenciarLoja.listarLojas());
 
@@ -365,11 +370,16 @@ public class Menu {
                         System.out.print("\nInsira o CPF do vendedor: ");
                         String cpf = scan.nextLine();
 
-                        System.out.println("\n" + gerenciarLoja.listarLojas());
-                        System.out.print("Insira o nome da loja ao qual você quer associar o vendedor: ");
-                        String nomeLoja = scan.nextLine();
+                        if(GerenciarVendedor.vendedores.size() <= 0){
+                            System.out.println("\nNão há vendedores cadastrados.");
+                            break;
+                        } else {
+                            System.out.println(gerenciarLoja.listarLojas());
+                            System.out.print("Insira o nome da loja ao qual você quer associar o vendedor: ");
+                            String nomeLoja = scan.nextLine();
 
-                        System.out.println("\n" + gerenciarLoja.associarVendedor(cpf, nomeLoja));
+                            System.out.println(gerenciarLoja.associarVendedor(cpf, nomeLoja));
+                        }
                     } else if (opcaoMenuCadastro == 5) {
                         break;
                     } else {

@@ -14,12 +14,12 @@ public class GerenciarVeiculo {
         StringBuilder sb = new StringBuilder();
 
         if(veiculos.size() <= 0){
-            sb.append("Não há veículos para serem verificados.");
+            sb.append("\nNão há veículos para serem verificados.");
         } else {
             Veiculo veiculo = veiculos.stream().filter(x -> x.getPlaca().equalsIgnoreCase(placa)).findFirst().orElse(null);
 
             if(veiculo == null){
-                sb.append("Não há veiculo com essa placa.");
+                sb.append("\nNão há veiculo com essa placa.");
             } else {
                 sb.append("[INFORMAÇÕES DO CARRO]\n");
                     sb.append("Marca: " + veiculo.getMarca() + "\n");
@@ -66,7 +66,7 @@ public class GerenciarVeiculo {
         StringBuilder sb = new StringBuilder();
 
         if(veiculos.size() <= 0){
-            sb.append("Não há veiculos a serem listados.");
+            sb.append("\nNão há veiculos a serem listados.");
         } else {
             sb.append("[CARROS DISPONÍVEIS]\n");
             for(Veiculo veiculo : veiculos){
@@ -85,7 +85,7 @@ public class GerenciarVeiculo {
         Veiculo veiculo = veiculos.stream().filter(x -> x.getPlaca().equalsIgnoreCase(placa)).findFirst().orElse(null);
 
         if(veiculo == null){
-            return "Não existe veiculo com essa placa.";
+            return "\nNão existe veiculo com essa placa.";
         } else {
             veiculo.setMarca(marca);
             veiculo.setModelo(modelo);
@@ -93,7 +93,7 @@ public class GerenciarVeiculo {
             veiculo.setPlaca(placaNova);
             veiculo.setPreco(preco);
 
-            return "Dados do veículo alterados com sucesso.";
+            return "\nDados do veículo alterados com sucesso.";
         }
 
     }

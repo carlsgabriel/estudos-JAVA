@@ -14,9 +14,10 @@ public class GerenciarCliente {
 
         if(cliente == null){
             clientes.add(new Cliente(nome, cpf, telefone));
-            return "Cliente cadastrado com sucesso.";
+
+            return "\nCliente cadastrado com sucesso.";
         } else {
-            return "Já existe um cliente com esse mesmo CPF.";
+            return "\nJá existe um cliente com esse mesmo CPF.";
         }
     }
 
@@ -49,10 +50,11 @@ public class GerenciarCliente {
         Cliente cliente = clientes.stream().filter(x -> x.getCPF().equalsIgnoreCase(cpf)).findFirst().orElse(null);
 
         if(cliente == null){
-            return "Não há cliente com esse CPF.";
+            return "\nNão há cliente com esse CPF.";
         } else {
             clientes.remove(cliente);
-            return "Cliente excluido com sucesso.";
+            
+            return "\nCliente excluido com sucesso.";
         }
     }
 
@@ -60,13 +62,13 @@ public class GerenciarCliente {
         Cliente cliente = clientes.stream().filter(x -> x.getCPF().equalsIgnoreCase(cpf)).findFirst().orElse(null);
 
         if(cliente == null){
-            return "Não há cliente com esse CPF.";
+            return "\nNão há cliente com esse CPF.";
         } else {
             cliente.setCPF(novoCpf);
             cliente.setNome(nome);
             cliente.setTelefone(telefone);
             
-            return "Dados do cliente alterado com sucesso.";
+            return "\nDados do cliente alterado com sucesso.";
         }
     }
 

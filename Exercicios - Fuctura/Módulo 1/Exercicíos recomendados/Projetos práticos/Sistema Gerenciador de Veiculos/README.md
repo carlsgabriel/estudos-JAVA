@@ -1,1 +1,1 @@
-GerenciarLoja e GerenciarVeiculo OK.
+Falta só menu e espaçamento.
