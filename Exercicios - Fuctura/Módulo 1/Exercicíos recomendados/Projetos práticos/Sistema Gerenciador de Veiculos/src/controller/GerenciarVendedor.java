@@ -3,7 +3,6 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Loja;
 import model.Vendedor;
 
 public class GerenciarVendedor {
@@ -16,16 +15,15 @@ public class GerenciarVendedor {
         if(vendedores.size() <= 0){
             sb.append("\nNão há vendedor a ser consultado.");
         } else {
-            for(Vendedor vendedor : vendedores){
-                if(vendedor.getNome().equalsIgnoreCase(nomeVendedor)){
-                    sb.append("\n[VENDEDOR]\n");
-                    sb.append("Nome: " + vendedor.getNome() + "\n");
-                    sb.append("CPF: " + vendedor.getCPF() + "\n");
-                    sb.append("Telefone: " + vendedor.getTelefone());
-                    break;
-                } else {
-                    sb.append("\nNão há vendedor com esse nome.");
-                }
+            Vendedor vendedor = vendedores.stream().filter(x -> x.getNome().equalsIgnoreCase(nomeVendedor)).findFirst().orElse(null);
+
+            if(vendedor == null){
+                sb.append("Não há vendedor com esse nome");
+            } else {
+                sb.append("\n[VENDEDOR]\n");
+                sb.append("Nome: " + vendedor.getNome() + "\n");
+                sb.append("CPF: " + vendedor.getCPF() + "\n");
+                sb.append("Telefone: " + vendedor.getTelefone());
             }
         }
 

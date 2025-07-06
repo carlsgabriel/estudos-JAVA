@@ -7,44 +7,67 @@ import model.Cliente;
 
 public class GerenciarCliente {
 
-    List<Cliente> clientes = new ArrayList<>();
+    static List<Cliente> clientes = new ArrayList<>();
 
     public String cadastrarClientes(String nome, String cpf, String telefone){
-        clientes.add(new Cliente(nome, cpf, telefone));
+        Cliente cliente = clientes.stream().filter(x -> x.getCPF().equalsIgnoreCase(cpf)).findFirst().orElse(null);
 
-        String cadastro = "";
-        for(Cliente cliente : clientes){
-            if(cliente.getNome().equalsIgnoreCase(nome)){
-                cadastro =  "Cliente adicionado com sucesso.";
-            } else {
-                cadastro = "Cliente não adicionado.";
-            }
+        if(cliente == null){
+            clientes.add(new Cliente(nome, cpf, telefone));
+            return "Cliente cadastrado com sucesso.";
+        } else {
+            return "Já existe um cliente com esse mesmo CPF.";
         }
-
-        return cadastro;
     }
 
     public String consultarCliente(String cpf){
+        StringBuilder sb = new StringBuilder();
+
         if(clientes.size() <= 0){
-            return "Não há cliente a ser consultado.";
+            sb.append("\nNão há clientes a serem consultados.");
         } else {
-            StringBuilder sb = new StringBuilder();
+            Cliente cliente = clientes.stream().filter(x -> x.getCPF().equalsIgnoreCase(cpf)).findFirst().orElse(null);
 
-            for(Cliente cliente : clientes){
-                sb.append("\nCliente:");
-                if(cliente.getCPF().equals(cpf)){
-                    sb.append("\nNome: " + cliente.getNome() + "\n");
-                    sb.append("CPF: " + cliente.getCPF() + "\n");
-                    sb.append("Telefone: " + cliente.getTelefone());
-                }
+            if(cliente == null){
+                sb.append("\nNão há cliente com esse CPF.");
+            } else {
+                sb.append("\n[CLIENTE]\n");
+                sb.append("Nome: " + cliente.getNome() + "\n");
+                sb.append("CPF: " + cliente.getCPF() + "\n");
+                sb.append("Telefone: " + cliente.getTelefone());
             }
-
-            return sb.toString();
         }
+
+        return sb.toString();
     }
 
     public List<Cliente> getClientes() {
         return clientes;
+    }
+
+    public String excluirCliente(String cpf){
+        Cliente cliente = clientes.stream().filter(x -> x.getCPF().equalsIgnoreCase(cpf)).findFirst().orElse(null);
+
+        if(cliente == null){
+            return "Não há cliente com esse CPF.";
+        } else {
+            clientes.remove(cliente);
+            return "Cliente excluido com sucesso.";
+        }
+    }
+
+    public String alterarDados(String cpf, String nome, String novoCpf, String telefone){
+        Cliente cliente = clientes.stream().filter(x -> x.getCPF().equalsIgnoreCase(cpf)).findFirst().orElse(null);
+
+        if(cliente == null){
+            return "Não há cliente com esse CPF.";
+        } else {
+            cliente.setCPF(novoCpf);
+            cliente.setNome(nome);
+            cliente.setTelefone(telefone);
+            
+            return "Dados do cliente alterado com sucesso.";
+        }
     }
 
 }

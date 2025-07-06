@@ -12,44 +12,44 @@ public class GerenciarLoja {
     static List<Loja> lojas = new ArrayList<>();
 
     public String listarLojas(){
-        if(lojas.size() <= 0){
-            return "Não há lojas a serem listadas.";
-        } else {
-            StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
-            sb.append("[LOJAS CADASTRADAS] \n");
+        if(lojas.size() <= 0){
+            sb.append("Não há lojas a serem listadas.");
+        } else {
             for(Loja loja : lojas){
+                sb.append("\n[LOJAS CADASTRADAS]\n");
                 sb.append("\nNome: " + loja.getNome() + "\n");
                 sb.append("Endereço: " + loja.getEndereco() + "\n");
                 sb.append("Telefone: " + loja.getTelefone() + "\n");
             }
-
-            return sb.toString();
         }
+
+        return sb.toString();
     }
 
     public String listarVeiculos(String nomeLoja){
         StringBuilder sb = new StringBuilder();
 
         if(lojas.size() <= 0){
-            return "Não há lojas a serem verificadas.";
+            sb.append("Não há lojas a serem verificadas.");
         } else {
-            for(Loja loja : lojas){
-                if(loja.getNome().equalsIgnoreCase(nomeLoja)){
-                    if(loja.getVeiculos().size() <= 0){
-                        return "Não há veículos disponíveis.";
-                    } else {
-                        for(Veiculo veiculo : loja.getVeiculos()){
-                            sb.append("Veiculos disponíveis: \n");
-                            sb.append("\nMarca: " + veiculo.getMarca() + "\n");
-                            sb.append("Modelo: " + veiculo.getModelo() + "\n");
-                            sb.append("Ano: " + veiculo.getAno() + "\n");
-                            sb.append("Placa: " + veiculo.getPlaca() + "\n");
-                            sb.append("Preço: " + veiculo.getPreco() + "\n");
-                        }
-                    }
+            Loja loja = lojas.stream().filter(x -> x.getNome().equalsIgnoreCase(nomeLoja)).findFirst().orElse(null);
+
+            if(loja == null){
+                sb.append("Não há loja com esse nome.");
+            } else {
+                if(loja.getVeiculos().size() <= 0){
+                    sb.append("Não há veículos disponíveis na loja.");
                 } else {
-                    return "Não há lojas com o nome inserido.";
+                    for(Veiculo veiculo : loja.getVeiculos()){
+                        sb.append("[VEICULOS DISPONÍVEIS]\n");
+                        sb.append("\nMarca: " + veiculo.getMarca() + "\n");
+                        sb.append("Modelo: " + veiculo.getModelo() + "\n");
+                        sb.append("Ano: " + veiculo.getAno() + "\n");
+                        sb.append("Placa: " + veiculo.getPlaca() + "\n");
+                        sb.append("Preço: " + veiculo.getPreco() + "\n");
+                    }
                 }
             }
         }
@@ -61,22 +61,22 @@ public class GerenciarLoja {
         StringBuilder sb = new StringBuilder();
 
         if(lojas.size() <= 0){
-            return "Não há lojas a serem verificadas.";
+            sb.append("Não há lojas a serem verificadas.");
         } else {
-            for(Loja loja : lojas){
-                if(loja.getNome().equalsIgnoreCase(nomeLoja)){
-                    if(loja.getVendedores().size() <= 0){
-                        return "Não há vendedores associados à essa loja.";
-                    } else {
-                        for(Vendedor vendedor : loja.getVendedores()){
-                            sb.append("Vendedores disponíveis: \n");
-                            sb.append("\nNome: " + vendedor.getNome() + "\n");
-                            sb.append("CPF: " + vendedor.getCPF() + "\n");
-                            sb.append("Telefone: " + vendedor.getTelefone() + "\n");
-                        }
-                    }
+            Loja loja = lojas.stream().filter(x -> x.getNome().equalsIgnoreCase(nomeLoja)).findFirst().orElse(null);
+
+            if(loja == null){
+                sb.append("Não há loja com esse nome.");
+            } else {
+                if(loja.getVendedores().size() <= 0){
+                    sb.append("Não há vendedores cadastrados na loja.");
                 } else {
-                    return "Não há lojas com o nome inserido.";
+                    for(Vendedor vendedor : loja.getVendedores()){
+                        sb.append("[VENDEDORES CADASTRADOS]\n");
+                        sb.append("\nNome: " + vendedor.getNome() + "\n");
+                        sb.append("CPF: " + vendedor.getCPF() + "\n");
+                        sb.append("Telefone: " + vendedor.getTelefone() + "\n");
+                    }
                 }
             }
         }
@@ -85,88 +85,60 @@ public class GerenciarLoja {
     }
 
     public String cadastrarLoja(String nome, String endereco, String telefone){
-        lojas.add(new Loja(nome, endereco, telefone));
+        Loja loja = lojas.stream().filter(x -> x.getNome().equalsIgnoreCase(nome)).findFirst().orElse(null);
 
-        String cadastro = "";
-        for(Loja loja : lojas){
-            if(loja.getNome().equalsIgnoreCase(nome)){
-                cadastro = "Loja adicionado com sucesso.";
-                return cadastro;
-            } else {
-                cadastro = "A loja não foi adicionada.";
-            }
+        if(loja == null){
+            lojas.add(new Loja(nome, endereco, telefone));
+
+            return "Loja criada com sucesso.";
+        } else {
+            return "Já existe uma loja com esse mesmo nome.";
         }
-
-        return cadastro;
+ 
     }
 
     public String excluirLoja(String nomeLoja){
-        String excluir = "";
+        Loja loja = lojas.stream().filter(x -> x.getNome().equalsIgnoreCase(nomeLoja)).findFirst().orElse(null);
 
-        if(lojas.size() < 0){
-            excluir = "Não há lojas a serem verificadas.";
+        if(loja == null){
+            return "Não há loja com esse nome.";
         } else {
-            for(Loja loja : lojas){
-                if(loja.getNome().equalsIgnoreCase(nomeLoja)){
-                    lojas.remove(loja);
-                    excluir = "Loja removida com sucesso.";
-                    break;
-                } else {
-                    excluir = "Não há lojas com esse nome.";
-                }
-            }
+            lojas.remove(loja);
+            
+            return "Loja excluida com sucesso.";
         }
         
-        return excluir;
     }
 
     public String alterarDados(String nome, String nomeNovo, String endereco, String telefone){
-        String alterar = "";
-        for(Loja loja : lojas){
-            if(lojas.size() > 0){
-                if(loja.getNome().equalsIgnoreCase(nome)){
-                    loja.setNome(nomeNovo);
-                    loja.setEndereco(endereco);
-                    loja.setTelefone(telefone);
-                    alterar = "Dados da loja alterados com sucesso.";
-                } else {
-                    alterar = "Os dados da loja não foram alterados, pois não há loja com essa nome.";
-                }
-            } else {
-                alterar =  "Não há lojas a serem alterados.";
-            } 
-        }
+        Loja loja = lojas.stream().filter(x -> x.getNome().equalsIgnoreCase(nome)).findFirst().orElse(null);
 
-        return "\n" + alterar;
+        if(loja == null){
+            return "Não há loja com esse nome.";
+        } else {
+            loja.setNome(nomeNovo);
+            loja.setEndereco(endereco);
+            loja.setTelefone(telefone);
+
+            return "Dados de cadastro da loja alterados com sucesso.";
+        }
+    
     }
 
     public String associarVendedor(String cpf, String nomeLoja){
-
-        Vendedor vendedor = null;
-        for(Vendedor ven : GerenciarVendedor.vendedores){
-            if(ven.getCPF().equalsIgnoreCase(cpf)){
-                vendedor = ven;
-                break;
-            }
-        }
-
+        Vendedor vendedor = GerenciarVendedor.vendedores.stream().filter(x -> x.getCPF().equalsIgnoreCase(cpf)).findFirst().orElse(null);
         if(vendedor == null){
-            return "Não existe vendedor com esse CPF.";
+            return "Não há vendedor com esse nome.";
         }
 
-        Loja loja = null;
-        for(Loja l : lojas){
-            if(l.getNome().equalsIgnoreCase(nomeLoja)){
-                loja = l;
-            }
-        }
-
+        Loja loja = lojas.stream().filter(x -> x.getNome().equalsIgnoreCase(nomeLoja)).findFirst().orElse(null);
         if(loja == null){
-            return "Loja com nome informado não foi encontrada.";
-        }
+            return "Não existe loja com esse nome.";
+        } else {
+            loja.adicionarVendedores(vendedor);
 
-        loja.adicionarVendedores(vendedor);
-        return "Vendedor associado à loja com sucesso.";
+            return "Vendedor associado à loja com sucesso.";
+        }
     }
 
 }

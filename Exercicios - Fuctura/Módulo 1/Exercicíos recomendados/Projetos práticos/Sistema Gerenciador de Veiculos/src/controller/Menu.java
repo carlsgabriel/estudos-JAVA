@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 public class Menu {
 
-    Scanner scan = null;
-    GerenciarVeiculo gerenciarVeiculo = null;
-    GerenciarLoja gerenciarLoja = null;
-    GerenciarCliente gerenciarCliente = null;
-    GerenciarVendedor gerenciarVendedor = null;
-    GerenciarVenda gerenciarVenda = null;
+    Scanner scan;
+    GerenciarVeiculo gerenciarVeiculo;
+    GerenciarLoja gerenciarLoja;
+    GerenciarVendedor gerenciarVendedor;
+    GerenciarCliente gerenciarCliente;
+    GerenciarVenda gerenciarVenda;
 
     public Menu(){
         scan = new Scanner(System.in);
@@ -62,28 +62,36 @@ public class Menu {
 
             switch (opcaoMenuFrenteLoja) {
                 case 1 -> {
-                    System.out.println("\n1. Consultar veículo");
-                    System.out.println("2. Voltar para o menu anterior");
-                    System.out.print("Opção desejada: ");
-                    opcaoMenuFrenteLoja = scan.nextInt();
-                    scan.nextLine();
-
-                    if(opcaoMenuFrenteLoja == 1){
-                        System.out.print("\nPlaca do carro: ");
-                        String placa = scan.nextLine();
-
-                        System.out.println("\n" + gerenciarVeiculo.consultarVeiculo(placa));
-                    } else if (opcaoMenuFrenteLoja == 2){
-                        menuFrenteLoja();
+                    if(GerenciarVeiculo.veiculos.size() <= 0){
+                        System.out.println("\nNão há veiculos a serem gerenciados.");
+                        break;
                     } else {
-                        System.out.println("\nValor inválido.");
-                    }
-                }
-                case 2 -> {
-                        System.out.println("\n" + gerenciarLoja.listarLojas());
-                        if(gerenciarLoja.listarLojas().length() < 40){
+                        System.out.println("\n1. Consultar veículo");
+                        System.out.println("2. Voltar para o menu anterior");
+                        System.out.print("Opção desejada: ");
+                        opcaoMenuFrenteLoja = scan.nextInt();
+                        scan.nextLine();
+
+                        if(opcaoMenuFrenteLoja == 1){
+                            System.out.print("\nPlaca do carro: ");
+                            String placa = scan.nextLine();
+
+                            System.out.println("\n" + gerenciarVeiculo.consultarVeiculo(placa));
+                        } else if (opcaoMenuFrenteLoja == 2){
                             break;
                         } else {
+                            System.out.println("\nValor inválido.");
+                        }
+                    }
+                    
+                }
+                case 2 -> {
+                        if(GerenciarLoja.lojas.size() <= 0){
+                            System.out.println("\nNão há lojas a serem verificadas.");
+                            break;
+                        } else {
+                            System.out.println(gerenciarLoja.listarLojas());
+
                             System.out.print("Escolha o nome da loja ao qual você quer selecionar: ");
                             String nomeLoja = scan.nextLine();
 
@@ -99,100 +107,105 @@ public class Menu {
                             } else if (opcaoMenuFrenteLoja == 2){
                                 System.out.println("\n" + gerenciarLoja.listarVendedores(nomeLoja));
                             } else if (opcaoMenuFrenteLoja == 3){
-                                menuFrenteLoja();
+                                break;
                             } else {
                                 System.out.println("\nValor inválido.");
                             }
                         }  
                 }
                 case 3 -> {
-                    System.out.println("\n1. Consultar vendedor pelo nome");
-                    System.out.println("2. Voltar para o menu anterior");
-                    System.out.print("Opção desejada: ");
-                    opcaoMenuFrenteLoja = scan.nextInt();
-                    scan.nextLine();
-
-                    if(opcaoMenuFrenteLoja == 1){
-                        System.out.print("\nNome do vendedor: ");
-                        String nome = scan.nextLine();
-
-                        System.out.println(gerenciarVendedor.consultarVendedor(nome));
-                    } else if (opcaoMenuFrenteLoja == 2){
-                        menuFrenteLoja();
+                    if(GerenciarVendedor.vendedores.size() <= 0){
+                        System.out.println("\nNão há vendedores a serem gerenciados.");
+                        break;
                     } else {
-                        System.out.println("\nValor inválido.");
+                        System.out.println("\n1. Consultar vendedor pelo nome");
+                        System.out.println("2. Voltar para o menu anterior");
+                        System.out.print("Opção desejada: ");
+                        opcaoMenuFrenteLoja = scan.nextInt();
+                        scan.nextLine();
+
+                        if(opcaoMenuFrenteLoja == 1){
+                            System.out.print("\nNome do vendedor: ");
+                            String nome = scan.nextLine();
+
+                            System.out.println(gerenciarVendedor.consultarVendedor(nome));
+                        } else if (opcaoMenuFrenteLoja == 2){
+                            break;
+                        } else {
+                            System.out.println("\nValor inválido.");
+                        }
                     }
+    
                 }
                 case 4 -> {
-                    System.out.println("\n1. Cadastrar cliente");
-                    System.out.println("2. Consultar cliente por CPF");
-                    System.out.println("3. Voltar para o menu anterior.");
-                    System.out.print("Opção desejada: ");
-                    opcaoMenuFrenteLoja = scan.nextInt();
-                    scan.nextLine();
-
-                    if(opcaoMenuFrenteLoja == 1){
-                        System.out.println("\nInformaçoes para cadastro de cliente abaixo");
-
-                        System.out.print("Nome: ");
-                        String nome = scan.nextLine();
-
-                        System.out.print("CPF: ");
-                        String cpf = scan.nextLine();
-
-                        System.out.print("Telefone: ");
-                        String telefone = scan.nextLine();
-
-                        System.out.println("\n" + gerenciarCliente.cadastrarClientes(nome, cpf, telefone));
-                    } else if (opcaoMenuFrenteLoja == 2){
-                        System.out.print("\nInsira o CPF do cliente: ");
-                        String cpf = scan.nextLine();
-
-                        System.out.println(gerenciarCliente.consultarCliente(cpf));
-                    } else if (opcaoMenuFrenteLoja == 3){
-                        menuFrenteLoja();
+                    if(GerenciarCliente.clientes.size() <= 0){
+                        System.out.println("\nNão há clientes a serem verificados.");
+                        break;
                     } else {
-                        System.out.println("Valor inválido.");
+                        System.out.println("\n1. Cadastrar cliente");
+                        System.out.println("2. Consultar cliente por CPF");
+                        System.out.println("3. Voltar para o menu anterior.");
+                        System.out.print("Opção desejada: ");
+                        opcaoMenuFrenteLoja = scan.nextInt();
+                        scan.nextLine();
+
+                        if(opcaoMenuFrenteLoja == 1){
+                            System.out.println("\n[INFORMAÇÕES PARA O CADASTRO DO CLIENTE]");
+
+                            System.out.print("Nome: ");
+                            String nome = scan.nextLine();
+
+                            System.out.print("CPF: ");
+                            String cpf = scan.nextLine();
+
+                            System.out.print("Telefone: ");
+                            String telefone = scan.nextLine();
+
+                            System.out.println("\n" + gerenciarCliente.cadastrarClientes(nome, cpf, telefone));
+                        } else if (opcaoMenuFrenteLoja == 2){
+                            System.out.print("\nInsira o CPF do cliente: ");
+                            String cpf = scan.nextLine();
+
+                            System.out.println(gerenciarCliente.consultarCliente(cpf));
+                        } else if (opcaoMenuFrenteLoja == 3){
+                            break;
+                        } else {
+                            System.out.println("Valor inválido.");
+                        }
                     }
                 }
                 case 5 -> {
-                    System.out.println("\n1. Cadastrar venda");
-                    System.out.println("2. Voltar para o menu anterior");
-                    System.out.print("Opção desejada: ");
-                    opcaoMenuFrenteLoja = scan.nextInt();
-                    scan.nextLine();
-
-                    if(opcaoMenuFrenteLoja == 1){
-                        System.out.println("\nDados da venda:\n");
-                        System.out.println("Veiculos:");
-                        System.out.println(gerenciarVeiculo.getVeiculos());
-                        System.out.print("Insira a placa do veículo: ");
-                        String placa = scan.nextLine();
-
-                        System.out.println();
-                        
-                        System.out.println("Vendedores:");
-                        System.out.println(gerenciarVendedor.getVendedores() + "\n");
-                        System.out.print("Insira o nome do vendedor: ");
-                        String nomeVendedor = scan.nextLine();
-
-                        System.out.println();
-
-                        System.out.println("Clientes: ");
-                        System.out.println(gerenciarCliente.getClientes() + "\n");
-                        System.out.print("Insira o nome do cliente: ");
-                        String nomeCliente = scan.nextLine();
-
-                        System.out.println();
-
-                        System.out.print("Data da venda (dia/mes/ano): ");
-                        String data = scan.nextLine();
-
-                        System.out.println(gerenciarVenda.cadastrarVenda(placa, nomeVendedor, nomeCliente, data));
-                    } else if (opcaoMenuFrenteLoja == 2){
-                        menuFrenteLoja();
+                    if(gerenciarVenda.vendas.size() <= 0){
+                        System.out.println("\nNão há vendas a serem gerenciadas.");
+                        break;
                     } else {
-                        System.out.println("\nValor inválido.");
+                        System.out.println("\n1. Cadastrar venda");
+                        System.out.println("2. Voltar para o menu anterior");
+                        System.out.print("Opção desejada: ");
+                        opcaoMenuFrenteLoja = scan.nextInt();
+                        scan.nextLine();
+
+                        if(opcaoMenuFrenteLoja == 1){
+                            System.out.println("\n[DADOS DA VENDA]");
+
+                            System.out.print("Insira a placa do veículo: ");
+                            String placa = scan.nextLine();
+
+                            System.out.print("Insira o nome do vendedor: ");
+                            String nomeVendedor = scan.nextLine();
+
+                            System.out.print("Insira o nome do cliente: ");
+                            String nomeCliente = scan.nextLine();
+
+                            System.out.print("Data da venda (dia/mes/ano): ");
+                            String data = scan.nextLine();
+
+                            System.out.println("\n" + gerenciarVenda.cadastrarVenda(placa, nomeVendedor, nomeCliente, data));
+                        } else if (opcaoMenuFrenteLoja == 2){
+                            break;
+                        } else {
+                            System.out.println("\nValor inválido.");
+                        }
                     }
                 }
                 case 6 -> {
@@ -294,7 +307,7 @@ public class Menu {
 
                         System.out.println("\n" + gerenciarVeiculo.associarVeiculo(placa, nomeLoja));
                     } else if (opcaoMenuCadastro == 5){
-                        menuCadastro();
+                        break;
                     } else {
                         System.out.println("\nValor inválido.");
                     }
@@ -420,13 +433,39 @@ public class Menu {
                     scan.nextLine();
 
                     if(opcaoMenuCadastro == 1){
+                        System.out.println("\n[INFORMAÇÕES PARA O CADASTRO DO CLIENTE]");
 
+                        System.out.print("Nome: ");
+                        String nome = scan.nextLine();
+
+                        System.out.print("CPF: ");
+                        String cpf = scan.nextLine();
+
+                        System.out.print("Telefone: ");
+                        String telefone = scan.nextLine();
+
+                        System.out.println("\n" + gerenciarCliente.cadastrarClientes(nome, cpf, telefone));
                     } else if (opcaoMenuCadastro == 2){
+                        System.out.print("\nInsira o CPF do cliente que você deseja excluir do sistema: ");
+                        String cpf = scan.nextLine();
 
+                        System.out.println("\n" + gerenciarCliente.excluirCliente(cpf));
                     } else if (opcaoMenuCadastro == 3){
+                        System.out.print("\nInsira o CPF do cliente ao qual você deseja alterar os dados: ");
+                        String cpf = scan.nextLine();
+
+                        System.out.print("Nome: ");
+                        String nome = scan.nextLine();
+
+                        System.out.print("CPF: ");
+                        String cpfNovo = scan.nextLine();
+
+                        System.out.print("Telefone: ");
+                        String telefone = scan.nextLine();
                         
+                        System.out.println("\n" + gerenciarCliente.alterarDados(cpf, nome, cpfNovo, telefone));
                     } else if (opcaoMenuCadastro == 4){
-                        menuCadastro();
+                        break;
                     } else {
                         System.out.println("Valor inválido.");
                     }
@@ -441,13 +480,48 @@ public class Menu {
                     scan.nextLine();
 
                     if(opcaoMenuCadastro == 1){
+                        System.out.println("\n[DADOS DA VENDA]");
 
+                        System.out.print("Insira a placa do veículo: ");
+                        String placa = scan.nextLine();
+
+                        System.out.print("Insira o nome do vendedor: ");
+                        String nomeVendedor = scan.nextLine();
+
+                        System.out.print("Insira o nome do cliente: ");
+                        String nomeCliente = scan.nextLine();
+
+                        System.out.print("Data da venda (dia/mes/ano): ");
+                        String data = scan.nextLine();
+
+                        System.out.println("\n" + gerenciarVenda.cadastrarVenda(placa, nomeVendedor, nomeCliente, data));
                     } else if (opcaoMenuCadastro == 2){
-                        
-                    } else if (opcaoMenuCadastro == 3){
+                        System.out.print("\nInsira a placa do veículo registrado na venda: ");
+                        String placa = scan.nextLine();
 
+                        System.out.println("\n" + gerenciarVenda.excluirVenda(placa));
+                    } else if (opcaoMenuCadastro == 3){
+                        System.out.print("\nInsira a placa do veículo registrado na venda: ");
+                        String placa = scan.nextLine();
+
+                        System.out.println("\n[DADOS PARA ALTERAÇÃO DE CADASTRO DA VENDA]");
+                        System.out.print("Placa do novo carro a ser registrado: ");
+                        String placaNova = scan.nextLine();
+
+                        System.out.print("Nome do novo vendedor a ser registrado: ");
+                        String nomeVendedor = scan.nextLine();
+
+                        System.out.print("Nome do novo cliente a ser registrado: ");
+                        String nomeCliente = scan.nextLine();
+
+                        System.out.print("Nova data a ser registrada (dia/mes/ano): ");
+                        String data = scan.nextLine();
+                        
+                        System.out.println("\n" + gerenciarVenda.alterarDados(placa, placaNova, nomeVendedor, nomeCliente, data));
+
+                        System.out.println("\n" + gerenciarVenda.vendas.get(0).getClienteComprador().getNome());
                     } else if (opcaoMenuCadastro == 4){
-                        menuCadastro();
+                        break;
                     } else {
                         System.out.println("\nValor inválido.");
                     }
