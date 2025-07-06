@@ -116,7 +116,7 @@ public class Menu {
                         System.out.print("\nNome do vendedor: ");
                         String nome = scan.nextLine();
 
-                        gerenciarVendedor.consultarVendedor("\n" + nome);
+                        System.out.println(gerenciarVendedor.consultarVendedor(nome));
                     } else if (opcaoMenuFrenteLoja == 2){
                         menuFrenteLoja();
                     } else {
@@ -331,7 +331,34 @@ public class Menu {
 
                         System.out.println("\n" + gerenciarLoja.excluirLoja(nomeLoja));
                     } else if (opcaoMenuCadastro == 3){
-                        menuCadastro();
+                        System.out.println("\n" + gerenciarLoja.listarLojas());
+
+                        System.out.print("Insira o nome da loja que você deseja alterar os dados: ");
+                        String loja = scan.nextLine();
+
+                        System.out.println("\n[NOVOS DADOS]");
+
+                        System.out.print("Nome: ");
+                        String nomeLoja = scan.nextLine();
+
+                        System.out.print("Endereco: ");
+                        String endereco = scan.nextLine();
+
+                        System.out.print("Telefone: ");
+                        String telefone = scan.nextLine();
+
+                        System.out.println(gerenciarLoja.alterarDados(loja, nomeLoja, endereco, telefone));
+                    } else if (opcaoMenuCadastro == 4){
+                        System.out.print("\nInsira o CPF do vendedor: ");
+                        String cpf = scan.nextLine();
+
+                        System.out.println("\n" + gerenciarLoja.listarLojas());
+                        System.out.print("Insira o nome da loja ao qual você quer associar o vendedor: ");
+                        String nomeLoja = scan.nextLine();
+
+                        System.out.println("\n" + gerenciarLoja.associarVendedor(cpf, nomeLoja));
+                    } else if (opcaoMenuCadastro == 5) {
+                        break;
                     } else {
                         System.out.println("\nValor inválido.");
                     }
@@ -346,13 +373,39 @@ public class Menu {
                     scan.nextLine();
 
                     if(opcaoMenuCadastro == 1){
-
-                    } else if (opcaoMenuCadastro == 2){
+                        System.out.println("\n[DADOS PARA CADASTRO DO VENDEDOR]");
                         
+                        System.out.print("Nome: ");
+                        String nome = scan.nextLine();
+
+                        System.out.print("CPF: ");
+                        String cpf = scan.nextLine();
+
+                        System.out.print("Telefone: ");
+                        String telefone = scan.nextLine();
+
+                        System.out.println("\n" + gerenciarVendedor.cadastrarVendedor(nome, cpf, telefone));
+                    } else if (opcaoMenuCadastro == 2){
+                        System.out.print("\nInsira o CPF do vendedor que você deseja excluir do sistema: ");
+                        String cpf = scan.nextLine();
+
+                        System.out.println("\n" + gerenciarVendedor.excluirVendedor(cpf));
                     } else if (opcaoMenuCadastro == 3){
-                    
+                        System.out.print("\nInsira o CPF do vendedor ao qual você deseja fazer alterações cadastrais: ");
+                        String cpf = scan.nextLine();
+
+                        System.out.print("\nNome: ");
+                        String nome = scan.nextLine();
+
+                        System.out.print("CPF: ");
+                        String cpfNovo = scan.nextLine();
+
+                        System.out.print("Telefone: ");
+                        String telefone = scan.nextLine();
+
+                        System.out.println(gerenciarVendedor.alterarDados(cpf, nome, cpfNovo, telefone));
                     } else if (opcaoMenuCadastro == 4){
-                        menuCadastro();
+                        break;
                     } else {
                         System.out.println("\nValor inválido.");
                     }

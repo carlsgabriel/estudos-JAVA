@@ -120,4 +120,53 @@ public class GerenciarLoja {
         return excluir;
     }
 
+    public String alterarDados(String nome, String nomeNovo, String endereco, String telefone){
+        String alterar = "";
+        for(Loja loja : lojas){
+            if(lojas.size() > 0){
+                if(loja.getNome().equalsIgnoreCase(nome)){
+                    loja.setNome(nomeNovo);
+                    loja.setEndereco(endereco);
+                    loja.setTelefone(telefone);
+                    alterar = "Dados da loja alterados com sucesso.";
+                } else {
+                    alterar = "Os dados da loja não foram alterados, pois não há loja com essa nome.";
+                }
+            } else {
+                alterar =  "Não há lojas a serem alterados.";
+            } 
+        }
+
+        return "\n" + alterar;
+    }
+
+    public String associarVendedor(String cpf, String nomeLoja){
+
+        Vendedor vendedor = null;
+        for(Vendedor ven : GerenciarVendedor.vendedores){
+            if(ven.getCPF().equalsIgnoreCase(cpf)){
+                vendedor = ven;
+                break;
+            }
+        }
+
+        if(vendedor == null){
+            return "Não existe vendedor com esse CPF.";
+        }
+
+        Loja loja = null;
+        for(Loja l : lojas){
+            if(l.getNome().equalsIgnoreCase(nomeLoja)){
+                loja = l;
+            }
+        }
+
+        if(loja == null){
+            return "Loja com nome informado não foi encontrada.";
+        }
+
+        loja.adicionarVendedores(vendedor);
+        return "Vendedor associado à loja com sucesso.";
+    }
+
 }
