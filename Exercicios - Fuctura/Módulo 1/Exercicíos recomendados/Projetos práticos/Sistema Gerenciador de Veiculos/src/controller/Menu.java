@@ -528,8 +528,6 @@ public class Menu {
                         String data = scan.nextLine();
                         
                         System.out.println("\n" + gerenciarVenda.alterarDados(placa, placaNova, nomeVendedor, nomeCliente, data));
-
-                        System.out.println("\n" + gerenciarVenda.vendas.get(0).getClienteComprador().getNome());
                     } else if (opcaoMenuCadastro == 4){
                         break;
                     } else {

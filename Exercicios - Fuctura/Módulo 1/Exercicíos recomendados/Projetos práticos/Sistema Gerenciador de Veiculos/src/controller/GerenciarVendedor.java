@@ -40,9 +40,9 @@ public class GerenciarVendedor {
         if(vendedor == null){
             vendedores.add(new Vendedor(nome, cpf, telefone));
 
-            return "\nVendedor cadastrado com sucesso.";
+            return "Vendedor cadastrado com sucesso.";
         }else {
-            return "\nJá existe um vendedor com esse mesmo CPF cadastrado.";
+            return "Já existe um vendedor com esse mesmo CPF cadastrado.";
         }
     }
 
@@ -50,11 +50,11 @@ public class GerenciarVendedor {
         Vendedor vendedor = vendedores.stream().filter(x -> x.getCPF().equalsIgnoreCase(cpf)).findFirst().orElse(null);
 
         if(vendedor == null){
-            return "\nNão há vendedor com esse CPF.";
+            return "Não há vendedor com esse CPF.";
         } else {
             vendedores.remove(vendedor);
 
-            return "\nVendedor removido com sucesso.";
+            return "Vendedor removido com sucesso.";
         }
     }
 
