@@ -7,7 +7,7 @@ import model.Vendedor;
 
 public class ControllerVendedor {
 
-    List<Vendedor> vendedores = new ArrayList<>();
+    static List<Vendedor> vendedores = new ArrayList<>();
 
     public List<Vendedor> getVendedores() {
         return vendedores;

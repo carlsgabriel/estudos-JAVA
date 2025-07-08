@@ -34,7 +34,7 @@ public class Menu {
             switch (op) {
                 case 1 -> exibirMenuCadastro();
                 case 2 -> exibirMenuConsulta();
-                // case 3 -> exibirMenuVenda();
+                case 3 -> exibirMenuVenda();
                 case 4 -> {
                     System.out.println("\nFinalizando programa...");
                     return;
@@ -144,8 +144,63 @@ public class Menu {
                 default -> System.out.println("Valor inválido.");
 
             }
-        }while(op != 5);
-        
+        }while(op != 5);   
+    }
+
+    private void exibirMenuVenda(){
+        int op = 999;
+        while(op != 8){
+            System.out.println("\n1. Adicionar Produto");
+            System.out.println("2. Remover Produto");
+            System.out.println("3. Calcular Total");
+            System.out.println("4. Associar Cliente");
+            System.out.println("5. Associar Vendedor");
+            System.out.println("6. Concluir Venda");
+            System.out.println("7. Cancelar Venda");
+            System.out.println("8. Voltar para o menu principal");
+            System.out.print("Opção desejada: ");
+            op = scan.nextInt();
+            scan.nextLine();
+
+            switch (op) {
+                case 1 -> {
+                    System.out.print("\nInsira o nome do produto que você deseja adicionar a venda: ");
+                    String nome = scan.nextLine();
+
+                    System.out.println("\n" + controllerVenda.adicionarProduto(nome));
+                }
+                case 2 -> {
+                    System.out.print("\nInsira o nome do produto que você deseja remover da venda: ");
+                    String nome = scan.nextLine();
+
+                    System.out.println("\n" + controllerVenda.removerProduto(nome));
+                }
+                case 3 -> {
+                    System.out.println("\n" + controllerVenda.calcularTotal());
+                }
+                case 4 -> {
+                    System.out.print("\nInsira o CPF do cliente ao qual você deseja associar a venda: ");
+                    String cpf = scan.nextLine();
+
+                    System.out.println("\n" + controllerVenda.associarCliente(cpf));
+                }
+                case 5 -> {
+                    System.out.print("\nInsira o CPF do vendedor ao qual você deseja associar a venda: ");
+                    String cpf = scan.nextLine();
+
+                    System.out.println("\n" + controllerVenda.associarVendedor(cpf));
+                }
+                case 6 -> System.out.println(controllerVenda.concluirVenda());
+                case 7 -> {
+                    System.out.println("\n" + controllerVenda.cancelarVenda());
+                }
+                case 8 -> {
+                    System.out.println("\nVoltando para o menu principal...");
+                    return;
+                }
+                default -> System.out.println("Dados inválidos.");
+            }
+        }
     }
 
 }

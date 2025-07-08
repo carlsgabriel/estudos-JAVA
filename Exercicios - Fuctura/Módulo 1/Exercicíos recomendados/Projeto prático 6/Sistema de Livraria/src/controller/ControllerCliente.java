@@ -7,7 +7,7 @@ import model.Cliente;
 
 public class ControllerCliente {
 
-    List<Cliente> clientes = new ArrayList<>();
+    static List<Cliente> clientes = new ArrayList<>();
 
     public List<Cliente> getClientes() {
         return clientes;

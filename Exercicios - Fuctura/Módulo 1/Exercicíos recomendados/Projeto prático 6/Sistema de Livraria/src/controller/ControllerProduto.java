@@ -8,7 +8,7 @@ import model.Produto;
 
 public class ControllerProduto {
 
-    List<Produto> produtos = new ArrayList<>();
+    static List<Produto> produtos = new ArrayList<>();
 
     public String cadastrarProduto(String nome, double preco, String categoriaString) {
         /*
