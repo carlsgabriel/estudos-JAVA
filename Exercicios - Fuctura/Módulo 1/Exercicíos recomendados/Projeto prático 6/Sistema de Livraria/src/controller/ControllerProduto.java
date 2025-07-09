@@ -62,4 +62,84 @@ public class ControllerProduto {
         return produtos;
     }
 
+    public String alterarDados(String nome, String categoriaString, String nomeNovo, double preco, String novaCategoria){
+        //"pAtual" apenas para ter acesso ao Produto atual.
+        Produto pAtual = produtos.stream().filter(x -> x.getNome().equalsIgnoreCase(nome)).findFirst().orElse(null);
+        if(pAtual == null){
+            return "Não existe produto com esse nome.";
+        }
+
+        //"cAtual" apenas para ter acesso a Categoria atual do produto.
+        Categoria cAtual = ControllerCategoria.categorias.stream().filter(x -> x.getNome().equalsIgnoreCase(categoriaString)).findFirst().orElse(null);
+        if(cAtual == null){
+            return "Não existe categoria com esse nome.";
+        }
+
+        //O produto pode continuar o mesmo e não tem tanto problema, mas a categoria pode mudar, então devemos verificar se essa nova Categoria é existente ou nova:
+        Categoria cNova = ControllerCategoria.categorias.stream().filter(x -> x.getNome().equalsIgnoreCase(novaCategoria)).findFirst().orElse(null);
+        if(cNova == null){
+            //Se essa nova categoria é nova, quer dizer que a categoria do seu Produto vai mudar, ele não vai mais pertencer a cAtual...
+            cAtual.removerProduto(pAtual);
+
+            //Computar possiveis alterações do Produto
+            pAtual.setNome(nomeNovo);
+            pAtual.setPreco(preco);
+
+            //Agora vamos cuidar para criar a nova Categoria, adiciona-la na List<Categoria> geral e adicionar na Categoria o Produto e no Produto a categoria.
+            Categoria categoria = new Categoria(novaCategoria);
+            pAtual.setCategoria(categoria);
+            categoria.adicionarProduto(pAtual);
+            ControllerCategoria.categorias.add(categoria);
+
+            return "Produto alterado com sucesso.";
+        } else {
+            //Caso a categoria já seja existente....
+            //Pode ser que o produto vá para mesma que já estava, ou vá para uma outra já existente.
+            cAtual.removerProduto(pAtual);
+
+            //Computador possiveis alterações em Produto
+            pAtual.setNome(nomeNovo);
+            pAtual.setPreco(preco);
+
+            //Adicionar o Produto a esta Categoria inserida pelo usuário e inserir em Produto a Categoria.
+            pAtual.setCategoria(cNova);
+            cNova.adicionarProduto(pAtual);
+
+            return "Produto alterado com sucesso.";
+        }
+    }
+
+    public String listarProdutos(){
+        StringBuilder sb = new StringBuilder();
+
+        if(produtos.size() <= 0){
+            sb.append("Não há produtos a serem listados.");
+        } else {
+            for(Produto produto : produtos){
+                sb.append("Nome: " + produto.getNome() + " - Categoria: " + produto.getCategoria().getNome());
+            }
+        }
+
+        return sb.toString();
+    }
+
+    public String removerProduto(String nome){
+        if(produtos.size() <= 0){
+            return "Não há produtos a serem removidos.";
+        } else {
+            Produto p = produtos.stream().filter(x -> x.getNome().equalsIgnoreCase(nome)).findFirst().orElse(null);
+
+            if(p == null){
+                return "Nome de produto inexistente ou incorreto.";
+            } else {
+                Categoria c = ControllerCategoria.categorias.stream().filter(x -> x.getNome().equalsIgnoreCase(p.getCategoria().getNome())).findFirst().orElse(null);
+
+                c.removerProduto(p);
+                produtos.remove(p);
+
+                return "Produto removido com sucesso.";
+            }
+        }
+    }
+
 }

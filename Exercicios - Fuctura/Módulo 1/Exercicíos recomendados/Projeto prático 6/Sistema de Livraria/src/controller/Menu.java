@@ -57,19 +57,74 @@ public class Menu {
 
             switch (op) {
                 case 1 -> {
-                    System.out.println("\n[DADOS PARA CADASTRO DE PRODUTO]");
-
-                    System.out.print("Nome: ");
-                    String nome = scan.nextLine();
-
-                    System.out.print("Preço: R$");
-                    double preco = scan.nextDouble();
+                    System.out.println("\n1. Cadastrar Produto");
+                    System.out.println("2. Alterar dados do produto");
+                    System.out.println("3. Excluir produto");
+                    System.out.println("4. Voltar para Menu Cadastro");
+                    System.out.print("Opção desejada: ");
+                    int opMenu = scan.nextInt();
                     scan.nextLine();
 
-                    System.out.print("Categoria: ");
-                    String categoria = scan.nextLine();
+                    switch (opMenu) {
+                        case 1 -> {
+                            System.out.println("\n[DADOS PARA CADASTRO DE PRODUTO]");
 
-                    System.out.println("\n" + controllerProduto.cadastrarProduto(nome, preco, categoria));
+                            System.out.print("Nome: ");
+                            String nome = scan.nextLine();
+
+                            System.out.print("Preço: R$");
+                            double preco = scan.nextDouble();
+                            scan.nextLine();
+
+                            System.out.print("Categoria: ");
+                            String categoria = scan.nextLine();
+
+                            System.out.println("\n" + controllerProduto.cadastrarProduto(nome, preco, categoria));
+                        }
+                        case 2 -> {
+                            if(ControllerProduto.produtos.size() <= 0){
+                                System.out.println("\nNão há produtos a serem listados.");
+                            } else {
+                                System.out.println("\n[PRODUTOS]");
+
+                                System.out.println(controllerProduto.listarProdutos() + "\n");
+
+                                System.out.print("Nome do produto ao qual você quer alterar as informações: ");
+                                String nome = scan.nextLine();
+
+                                System.out.print("Nome da categoria do produto ao qual você quer alterar as informações: ");
+                                String categoria = scan.nextLine();
+
+                                System.out.println("\n[NOVOS DADOS PARA ALTERAÇÃO DAS INFORMAÇÕES DE PRODUTO]");
+
+                                System.out.print("Nome: ");
+                                String nomeNovo = scan.nextLine();
+
+                                System.out.print("Preço: R$");
+                                double precoNovo = scan.nextDouble();
+                                scan.nextLine();
+
+                                System.out.print("Categoria: ");
+                                String categoriaNova = scan.nextLine();
+
+                                System.out.println("\n" + controllerProduto.alterarDados(nome, categoria, nomeNovo, precoNovo, categoriaNova));
+                            }
+                        }
+                        case 3 -> {
+                            if(ControllerProduto.produtos.size() <= 0){
+                                System.out.println("\nNão há produtos a serem excluidos.");
+                            } else {
+                                System.out.print("\nInsira o nome do produto que você quer remover: ");
+                                String nome = scan.nextLine();
+
+                                System.out.println("\n" + controllerProduto.removerProduto(nome));
+                            }
+                        }
+                        case 4 -> {
+                            System.out.println("Voltando...");
+                            break;
+                        }
+                    }
                 }
                 case 2 -> {
                     System.out.println("\n[DADOS PARA CADASTRO DE CLIENTE]");
