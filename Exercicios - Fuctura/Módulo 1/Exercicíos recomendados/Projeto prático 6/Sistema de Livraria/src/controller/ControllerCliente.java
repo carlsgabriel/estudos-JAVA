@@ -83,8 +83,8 @@ public class ControllerCliente {
         2. Como é String uma String de 11 caracteres, terei que separa-la, uma por uma e adicionar num vetor para poder verificar individualmente.
         Estando cada caractere em um vetor, percorrer cada item do vetor e verificar o seguinte:
         Esse caractere de String é igual a um dos caracteres de 0-9?
-        Se for, terá uma variável contadora que armazenará, cada confirmação dessa.
-        No final, se o valor de count for 11, todos os caracteres são de 1-9 e retorna true.
+        Se for, terá uma variável contadora (count) que terá seu valor iterado a cada confirmação dessa.
+        No final, se o valor de count for 11, todos os caracteres são de 0-9 e será retornado true, caso contrário, false.
         3. Se não tiver 11 caracteres, false.
     */
     private boolean verificadorDeCpf(String cpf){
