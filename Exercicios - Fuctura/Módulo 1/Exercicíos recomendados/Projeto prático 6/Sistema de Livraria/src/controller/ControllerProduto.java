@@ -30,6 +30,10 @@ public class ControllerProduto {
          * Dessa forma, na lista geral de Categorias cada elemento representará uma
          * categoria diferente, com seus produtos.
          */
+        if(preco < 0){
+            return "O preço do produto deve ser positivo.";
+        }
+
         Produto p = produtos.stream().filter(x -> x.getNome().equalsIgnoreCase(nome)).findFirst().orElse(null);
 
         if (p == null) {
@@ -63,6 +67,10 @@ public class ControllerProduto {
     }
 
     public String alterarDados(String nome, String categoriaString, String nomeNovo, double preco, String novaCategoria){
+        if(preco < 0){
+            return "O preço do produto deve ser positivo.";
+        }
+
         //"pAtual" apenas para ter acesso ao Produto atual.
         Produto pAtual = produtos.stream().filter(x -> x.getNome().equalsIgnoreCase(nome)).findFirst().orElse(null);
         if(pAtual == null){
@@ -116,7 +124,7 @@ public class ControllerProduto {
             sb.append("Não há produtos a serem listados.");
         } else {
             for(Produto produto : produtos){
-                sb.append("Nome: " + produto.getNome() + " - Categoria: " + produto.getCategoria().getNome());
+                sb.append("Nome: " + produto.getNome() + " - Categoria: " + produto.getCategoria().getNome() + "\n");
             }
         }
 

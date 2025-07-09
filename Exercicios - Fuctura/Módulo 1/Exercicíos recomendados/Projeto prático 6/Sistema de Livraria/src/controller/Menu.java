@@ -144,7 +144,7 @@ public class Menu {
                             System.out.print("Nome: ");
                             String nome = scan.nextLine();
 
-                            System.out.print("CPF: ");
+                            System.out.print("CPF (com 11 digitos e apenas números): ");
                             String cpf = scan.nextLine();
 
                             System.out.print("Endereço: ");
@@ -164,7 +164,7 @@ public class Menu {
                                 System.out.print("Nome: ");
                                 String nomeNovo = scan.nextLine();
 
-                                System.out.print("Cpf: ");
+                                System.out.print("CPF (com 11 digitos e apenas números): ");
                                 String cpfNovo = scan.nextLine();
 
                                 System.out.print("Endereço: ");
@@ -192,19 +192,67 @@ public class Menu {
                 }
 
                 case 3 -> {
-                    System.out.println("\n[DADOS PARA CADASTRO DE VENDEDOR]");
+                    System.out.println("\n1. Cadastrar Vendedor");
+                    System.out.println("2. Alterar dados do Vendedor");
+                    System.out.println("3. Excluir Vendedor");
+                    System.out.println("4. Voltar para Menu Cadastro");
+                    System.out.print("Opção desejada: ");
+                    int opMenu = scan.nextInt();
+                    scan.nextLine();
 
-                    System.out.print("Nome: ");
-                    String nome = scan.nextLine();
+                    switch (opMenu){
+                        case 1 -> {
+                            System.out.println("\n[DADOS PARA CADASTRO DE VENDEDOR]");
 
-                    System.out.print("CPF: ");
-                    String cpf = scan.nextLine();
+                            System.out.print("Nome: ");
+                            String nome = scan.nextLine();
 
-                    System.out.println("\n" + controllerVendedor.cadastrarVendedor(nome, cpf));
+                            System.out.print("CPF (com 11 digitos e apenas números): ");
+                            String cpf = scan.nextLine();
+
+                            System.out.println("\n" + controllerVendedor.cadastrarVendedor(nome, cpf));
+                        }
+                        case 2 -> {
+                            if(ControllerVendedor.vendedores.size() <= 0){
+                                System.out.println("\nNão há vendedores a serem listados.");
+                            } else {
+                                System.out.print("\nInsira o CPF do vendedor ao qual você deseja alterar os dados: ");
+                                String cpf = scan.nextLine();
+
+                                System.out.println("\n[NOVOS DADOS PARA ALTERAÇÃO DAS INFORMAÇÕES DE VENDEDOR]");
+
+                                System.out.print("Nome: ");
+                                String nomeNovo = scan.nextLine();
+
+                                System.out.print("CPF (com 11 digitos e apenas números): ");
+                                String cpfNovo = scan.nextLine();
+
+                                System.out.println("\n" + controllerVendedor.alterarDados(cpf, nomeNovo, cpfNovo));
+                            }
+                            
+                        }
+                        case 3 -> {
+                            if(ControllerVendedor.vendedores.size() <= 0){
+                                System.out.println("\nNão há vendedores a serem listados.");
+                            } else {
+                                System.out.print("\nCPF do vendedor ao qual você quer excluir do sistema: ");
+                                String cpf = scan.nextLine();
+
+                                System.out.println("\n" + controllerVendedor.removerVendedor(cpf));
+                            }
+                        }
+                        case 4 -> {
+                            System.out.println("Voltando...");
+                            break;
+                        }
+                        default -> System.out.println("Dado inválido.");
+                    }
                 }
+
                 case 4 -> {
                     break;
                 }
+
                 case 5 -> System.out.println("Dados inválidos.");
             }
         }

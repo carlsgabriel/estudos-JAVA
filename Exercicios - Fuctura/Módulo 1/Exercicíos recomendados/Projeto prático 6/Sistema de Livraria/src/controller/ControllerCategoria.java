@@ -25,6 +25,7 @@ public class ControllerCategoria {
     public String consultarProdutosPorCategoria(String nomeCategoria){
         StringBuilder sb = new StringBuilder();
 
+        int count = 0;
         Categoria categoria = categorias.stream().filter(x -> x.getNome().equalsIgnoreCase(nomeCategoria)).findFirst().orElse(null);
         if(categorias.size() <= 0){
             sb.append("Não há categorias a serem listadas.");
@@ -35,7 +36,9 @@ public class ControllerCategoria {
                 sb.append("[Produtos da categoria \"" + categoria.getNome() + "\"]\n");
                 for(Produto p : categoria.getProdutos()){
                     sb.append("Nome: " + p.getNome() + " - Preço: R$" + p.getPreco() + "\n");
+                    count++;
                 }
+                sb.append("Total de produtos na categoria \"" + categoria.getNome() + "\": " + count);
             }
         }
     

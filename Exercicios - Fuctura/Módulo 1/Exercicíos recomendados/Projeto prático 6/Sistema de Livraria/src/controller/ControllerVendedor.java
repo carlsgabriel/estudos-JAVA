@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Cliente;
 import model.Vendedor;
 
 public class ControllerVendedor {
@@ -14,14 +15,18 @@ public class ControllerVendedor {
     }
 
     public String cadastrarVendedor(String nome, String cpf){
-        Vendedor vendedor = vendedores.stream().filter(x -> x.getCpf().equalsIgnoreCase(cpf)).findFirst().orElse(null);
-
-        if(vendedor == null){
-            vendedores.add(new Vendedor(nome, cpf));
-
-            return "Vendedor cadastrado com sucesso.";
+        if(cpf.length() != 11){
+            return "O CPF precisa ter 11 digitos.";
         } else {
-            return "Já existe um vendedor com esse CPF cadastrado.";
+            Vendedor vendedor = vendedores.stream().filter(x -> x.getCpf().equalsIgnoreCase(cpf)).findFirst().orElse(null);
+
+            if(vendedor == null){
+                vendedores.add(new Vendedor(nome, cpf));
+
+                return "Vendedor cadastrado com sucesso.";
+            } else {
+                return "Já existe um vendedor com esse CPF cadastrado.";
+            }
         }
     }
 
@@ -42,6 +47,29 @@ public class ControllerVendedor {
         }
     
         return sb.toString();
+    }
+
+    public String alterarDados(String cpf, String nome, String novoCpf){
+        Vendedor vendedor = vendedores.stream().filter(x -> x.getCpf().equalsIgnoreCase(cpf)).findFirst().orElse(null);
+        if(vendedor == null){
+            return "Não há Vendedores com esse CPF.";
+        } else {
+            vendedor.setNome(nome);
+            vendedor.setCpf(novoCpf);
+
+            return "Dados do vendedor alterados com sucesso.";
+        }
+    }
+
+    public String removerVendedor(String cpf){
+        Vendedor vendedor = vendedores.stream().filter(x -> x.getCpf().equalsIgnoreCase(cpf)).findFirst().orElse(null);
+        if(vendedor == null){
+            return "Não existe um vendedor com esse CPF.";
+        } else {
+            vendedores.remove(vendedor);
+
+            return "Vendedor removido com sucesso.";
+        }
     }
 
 }

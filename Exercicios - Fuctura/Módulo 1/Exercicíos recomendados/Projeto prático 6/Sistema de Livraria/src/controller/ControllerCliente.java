@@ -14,14 +14,18 @@ public class ControllerCliente {
     }
 
     public String cadastrarCliente(String nome, String cpf, String endereco){
-        Cliente cliente = clientes.stream().filter(x -> x.getCpf().equalsIgnoreCase(cpf)).findFirst().orElse(null);
-
-        if(cliente == null){
-            clientes.add(new Cliente(nome, cpf, endereco));
-
-            return "Cliente cadastrado com sucesso.";
+        if(cpf.length() != 11){
+            return "O CPF precisa ter 11 digitos.";
         } else {
-            return "Já existe um cliente com esse CPF cadastrado.";
+            Cliente cliente = clientes.stream().filter(x -> x.getCpf().equalsIgnoreCase(cpf)).findFirst().orElse(null);
+
+            if(cliente == null){
+                clientes.add(new Cliente(nome, cpf, endereco));
+
+                return "Cliente cadastrado com sucesso.";
+            } else {
+                return "Já existe um cliente com esse CPF cadastrado.";
+            }
         }
     }
 
@@ -47,7 +51,7 @@ public class ControllerCliente {
     }
 
     public String alterarDados(String cpf, String nome, String novoCpf, String endereco){
-        Cliente cliente = clientes.stream().filter(x -> x.getCpf().equalsIgnoreCase(endereco)).findFirst().orElse(null);
+        Cliente cliente = clientes.stream().filter(x -> x.getCpf().equalsIgnoreCase(cpf)).findFirst().orElse(null);
         if(cliente == null){
             return "Não há clientes com esse CPF.";
         } else {
