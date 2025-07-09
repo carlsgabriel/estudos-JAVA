@@ -45,6 +45,29 @@ public class ControllerCliente {
 
         return sb.toString();
     }
-    
+
+    public String alterarDados(String cpf, String nome, String novoCpf, String endereco){
+        Cliente cliente = clientes.stream().filter(x -> x.getCpf().equalsIgnoreCase(endereco)).findFirst().orElse(null);
+        if(cliente == null){
+            return "Não há clientes com esse CPF.";
+        } else {
+            cliente.setNome(nome);
+            cliente.setCpf(novoCpf);
+            cliente.setEndereco(endereco);
+
+            return "Dados do cliente alterados com sucesso.";
+        }
+    }
+
+    public String removerCliente(String cpf){
+        Cliente cliente = clientes.stream().filter(x -> x.getCpf().equalsIgnoreCase(cpf)).findFirst().orElse(null);
+        if(cliente == null){
+            return "Não existe um cliente com esse CPF.";
+        } else {
+            clientes.remove(cliente);
+
+            return "Cliente removido com sucesso.";
+        }
+    }
 
 }

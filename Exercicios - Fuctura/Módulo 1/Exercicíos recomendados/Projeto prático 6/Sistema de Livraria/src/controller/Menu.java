@@ -58,8 +58,8 @@ public class Menu {
             switch (op) {
                 case 1 -> {
                     System.out.println("\n1. Cadastrar Produto");
-                    System.out.println("2. Alterar dados do produto");
-                    System.out.println("3. Excluir produto");
+                    System.out.println("2. Alterar dados do Produto");
+                    System.out.println("3. Excluir Produto");
                     System.out.println("4. Voltar para Menu Cadastro");
                     System.out.print("Opção desejada: ");
                     int opMenu = scan.nextInt();
@@ -124,22 +124,73 @@ public class Menu {
                             System.out.println("Voltando...");
                             break;
                         }
+                        default -> System.out.println("Dado inválido.");
                     }
                 }
+
                 case 2 -> {
-                    System.out.println("\n[DADOS PARA CADASTRO DE CLIENTE]");
+                    System.out.println("\n1. Cadastrar Cliente");
+                    System.out.println("2. Alterar dados do Cliente");
+                    System.out.println("3. Excluir Cliente");
+                    System.out.println("4. Voltar para Menu Cadastro");
+                    System.out.print("Opção desejada: ");
+                    int opMenu = scan.nextInt();
+                    scan.nextLine();
 
-                    System.out.print("Nome: ");
-                    String nome = scan.nextLine();
+                    switch (opMenu) {
+                        case 1 -> {
+                            System.out.println("\n[DADOS PARA CADASTRO DE CLIENTE]");
 
-                    System.out.print("CPF: ");
-                    String cpf = scan.nextLine();
+                            System.out.print("Nome: ");
+                            String nome = scan.nextLine();
 
-                    System.out.print("Endereço: ");
-                    String endereco = scan.nextLine();
+                            System.out.print("CPF: ");
+                            String cpf = scan.nextLine();
 
-                    System.out.println("\n" + controllerCliente.cadastrarCliente(nome, cpf, endereco));
+                            System.out.print("Endereço: ");
+                            String endereco = scan.nextLine();
+
+                            System.out.println("\n" + controllerCliente.cadastrarCliente(nome, cpf, endereco));
+                        }
+                        case 2 -> {
+                            if(ControllerCliente.clientes.size() <= 0){
+                                System.out.println("\nNão há clientes a serem listados.");
+                            } else {
+                                System.out.print("\nCPF do cliente ao qual você quer alterar as informações: ");
+                                String cpf = scan.nextLine();
+
+                                System.out.println("\n[NOVOS DADOS PARA ALTERAÇÃO DAS INFORMAÇÕES DE CLIENTE]");
+
+                                System.out.print("Nome: ");
+                                String nomeNovo = scan.nextLine();
+
+                                System.out.print("Cpf: ");
+                                String cpfNovo = scan.nextLine();
+
+                                System.out.print("Endereço: ");
+                                String enderecoNovo = scan.nextLine();
+
+                                System.out.println("\n" + controllerCliente.alterarDados(cpf, nomeNovo, cpfNovo, enderecoNovo));
+                            }
+                        }
+                        case 3 -> {
+                            if(ControllerCliente.clientes.size() <= 0){
+                                System.out.println("\nNão há clientes a serem listados.");
+                            } else {
+                                System.out.print("\nCPF do cliente ao qual você quer excluir do sistema: ");
+                                String cpf = scan.nextLine();
+
+                                System.out.println("\n" + controllerCliente.removerCliente(cpf));
+                            }
+                        }
+                        case 4 -> {
+                            System.out.println("Voltando...");
+                            break;
+                        }
+                        default -> System.out.println("Dado inválido.");
+                    }
                 }
+
                 case 3 -> {
                     System.out.println("\n[DADOS PARA CADASTRO DE VENDEDOR]");
 
