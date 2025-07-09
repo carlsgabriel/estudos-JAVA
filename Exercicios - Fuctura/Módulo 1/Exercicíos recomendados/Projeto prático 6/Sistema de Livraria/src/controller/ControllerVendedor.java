@@ -3,7 +3,6 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Cliente;
 import model.Vendedor;
 
 public class ControllerVendedor {
@@ -15,9 +14,7 @@ public class ControllerVendedor {
     }
 
     public String cadastrarVendedor(String nome, String cpf){
-        if(cpf.length() != 11){
-            return "O CPF precisa ter 11 digitos.";
-        } else {
+        if(verificadorDeCpf(cpf) == true){
             Vendedor vendedor = vendedores.stream().filter(x -> x.getCpf().equalsIgnoreCase(cpf)).findFirst().orElse(null);
 
             if(vendedor == null){
@@ -27,6 +24,8 @@ public class ControllerVendedor {
             } else {
                 return "Já existe um vendedor com esse CPF cadastrado.";
             }
+        } else {
+            return "O CPF precisa ser composto apenas por números e ter 11 digitos.";
         }
     }
 
@@ -54,10 +53,14 @@ public class ControllerVendedor {
         if(vendedor == null){
             return "Não há Vendedores com esse CPF.";
         } else {
-            vendedor.setNome(nome);
-            vendedor.setCpf(novoCpf);
+            if(verificadorDeCpf(novoCpf) == true){
+                vendedor.setNome(nome);
+                vendedor.setCpf(novoCpf);
 
-            return "Dados do vendedor alterados com sucesso.";
+                return "Dados do vendedor alterados com sucesso.";
+            } else {
+                return "O CPF precisa ser composto apenas por números e ter 11 digitos.";
+            }
         }
     }
 
@@ -69,6 +72,31 @@ public class ControllerVendedor {
             vendedores.remove(vendedor);
 
             return "Vendedor removido com sucesso.";
+        }
+    }
+
+    private boolean verificadorDeCpf(String cpf){
+        if(cpf.length() != 11){
+            return false;
+        } else {
+            String[] caracteres = cpf.split("");
+            
+            int count = 0;
+
+            for(int i=0;i<caracteres.length;i++){
+                if(caracteres[i].equalsIgnoreCase("1") || caracteres[i].equalsIgnoreCase("2") || caracteres[i].equalsIgnoreCase("3")
+                 || caracteres[i].equalsIgnoreCase("4") || caracteres[i].equalsIgnoreCase("5") || caracteres[i].equalsIgnoreCase("6")
+                  || caracteres[i].equalsIgnoreCase("7") || caracteres[i].equalsIgnoreCase("8") || caracteres[i].equalsIgnoreCase("9")
+                   || caracteres[i].equalsIgnoreCase("0")){
+                    count++;
+                  }
+            }
+
+            if(count != 11){
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 

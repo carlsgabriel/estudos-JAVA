@@ -92,8 +92,7 @@ public class Menu {
                                 System.out.print("Nome do produto ao qual você quer alterar as informações: ");
                                 String nome = scan.nextLine();
 
-                                System.out.print("Nome da categoria do produto ao qual você quer alterar as informações: ");
-                                String categoria = scan.nextLine();
+                                //Não é mais necessário pedir para o cliente escolher a categoria daquele produto, já foi resolvido.
 
                                 System.out.println("\n[NOVOS DADOS PARA ALTERAÇÃO DAS INFORMAÇÕES DE PRODUTO]");
 
@@ -107,7 +106,7 @@ public class Menu {
                                 System.out.print("Categoria: ");
                                 String categoriaNova = scan.nextLine();
 
-                                System.out.println("\n" + controllerProduto.alterarDados(nome, categoria, nomeNovo, precoNovo, categoriaNova));
+                                System.out.println("\n" + controllerProduto.alterarDados(nome, nomeNovo, precoNovo, categoriaNova));
                             }
                         }
                         case 3 -> {

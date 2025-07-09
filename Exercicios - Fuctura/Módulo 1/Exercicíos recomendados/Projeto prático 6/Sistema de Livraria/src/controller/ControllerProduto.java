@@ -66,7 +66,7 @@ public class ControllerProduto {
         return produtos;
     }
 
-    public String alterarDados(String nome, String categoriaString, String nomeNovo, double preco, String novaCategoria){
+    public String alterarDados(String nome, String nomeNovo, double preco, String novaCategoria){
         if(preco < 0){
             return "O preço do produto deve ser positivo.";
         }
@@ -78,12 +78,10 @@ public class ControllerProduto {
         }
 
         //"cAtual" apenas para ter acesso a Categoria atual do produto.
-        Categoria cAtual = ControllerCategoria.categorias.stream().filter(x -> x.getNome().equalsIgnoreCase(categoriaString)).findFirst().orElse(null);
-        if(cAtual == null){
-            return "Não existe categoria com esse nome.";
-        }
+        //Foi alterada a forma como tava antes, exigindo que o usuário inserisse uma categoria, porque não é papel do usuário apontar a categoria daquele produto... se aquele produto está vinculado a uma categoria, é obrigação do sistema pegar aquela categoria e gerencia-la. Por isso foi removido String categoriaString.
+        Categoria cAtual = ControllerCategoria.categorias.stream().filter(x -> x.getNome().equalsIgnoreCase(pAtual.getCategoria().getNome())).findFirst().orElse(null);
 
-        //O produto pode continuar o mesmo e não tem tanto problema, mas a categoria pode mudar, então devemos verificar se essa nova Categoria é existente ou nova:
+        //O produto pode continuar o mesmo e não tem tanto problema, mas a categoria pode mudar e aí já deve ocorrer uma "manobrar" maior, então devemos verificar se essa nova Categoria é existente ou nova:
         Categoria cNova = ControllerCategoria.categorias.stream().filter(x -> x.getNome().equalsIgnoreCase(novaCategoria)).findFirst().orElse(null);
         if(cNova == null){
             //Se essa nova categoria é nova, quer dizer que a categoria do seu Produto vai mudar, ele não vai mais pertencer a cAtual...
