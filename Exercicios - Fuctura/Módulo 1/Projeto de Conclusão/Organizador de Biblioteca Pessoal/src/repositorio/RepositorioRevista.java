@@ -7,6 +7,6 @@ import modelo.Revista;
 
 public class RepositorioRevista {
 
-    List<Revista> revistas = new ArrayList<>();
+    public static List<Revista> revistas = new ArrayList<>();
 
 }

@@ -7,6 +7,6 @@ import modelo.Album;
 
 public class RepositorioAlbum {
 
-    List<Album> albuns = new ArrayList<>();
+    public static List<Album> albuns = new ArrayList<>();
 
 }
