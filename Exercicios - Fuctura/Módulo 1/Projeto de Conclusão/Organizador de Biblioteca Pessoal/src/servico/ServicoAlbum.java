@@ -14,28 +14,32 @@ public class ServicoAlbum {
         if(albumExiste != null){
             return "Já existe um album com esse titulo.";
         } else {
-            Categoria categoriaExiste = RepositorioCategoria.categorias.stream().filter(x -> x.getNome().equalsIgnoreCase(categoriaString)).findFirst().orElse(null);
-
-            if(categoriaExiste != null){
-                Album album = new Album(titulo, autorOuArtista, categoriaExiste);
-
-                categoriaExiste.adicionarItens(album);
-
-                RepositorioAlbum.albuns.add(album);
-                RepositorioItem.itens.add(album);
-
-                return "Álbum adicionado com sucesso.";
+            if(titulo.isBlank() || autorOuArtista.isBlank() || categoriaString.isBlank()){
+                return "Os campos titulo, autor ou artista e categoria devem ser obrigatoriamente preenchidos.";
             } else {
-                Categoria categoria = new Categoria(categoriaString);
-                Album album = new Album(titulo, autorOuArtista, categoria);
+                Categoria categoriaExiste = RepositorioCategoria.categorias.stream().filter(x -> x.getNome().equalsIgnoreCase(categoriaString)).findFirst().orElse(null);
 
-                categoria.adicionarItens(album);
-                RepositorioCategoria.categorias.add(categoria);
+                if(categoriaExiste != null){
+                    Album album = new Album(titulo, autorOuArtista, categoriaExiste);
 
-                RepositorioAlbum.albuns.add(album);
-                RepositorioItem.itens.add(album);
+                    categoriaExiste.adicionarItens(album);
 
-                return "Álbum adicionado com sucesso.";
+                    RepositorioAlbum.albuns.add(album);
+                    RepositorioItem.itens.add(album);
+
+                    return "Álbum adicionado com sucesso.";
+                } else {
+                    Categoria categoria = new Categoria(categoriaString);
+                    Album album = new Album(titulo, autorOuArtista, categoria);
+
+                    categoria.adicionarItens(album);
+                    RepositorioCategoria.categorias.add(categoria);
+
+                    RepositorioAlbum.albuns.add(album);
+                    RepositorioItem.itens.add(album);
+
+                    return "Álbum adicionado com sucesso.";
+                }
             }
         }
     }

@@ -49,27 +49,31 @@ public class ServicoLivro {
         if(livroExiste != null){
             return "Já existe um livro com esse mesmo titulo.";
         } else {
-            Categoria categoriaExiste = RepositorioCategoria.categorias.stream().filter(x -> x.getNome().equalsIgnoreCase(categoriaString)).findFirst().orElse(null);
-            
-            if(categoriaExiste != null){
-                Livro livro = new Livro(titulo, autorOuArtista, categoriaExiste);
-                RepositorioLivro.livros.add(livro);
-                RepositorioItem.itens.add(livro);
-
-                categoriaExiste.adicionarItens(livro);
-                
-                return "Livro adicionado com sucesso.";
+            if(titulo.isBlank() || autorOuArtista.isBlank() || categoriaString.isBlank()){
+                return "Os campos titulo, autor ou artista e categoria devem ser obrigatoriamente preenchidos.";
             } else {
-                Categoria categoria = new Categoria(categoriaString);
+                Categoria categoriaExiste = RepositorioCategoria.categorias.stream().filter(x -> x.getNome().equalsIgnoreCase(categoriaString)).findFirst().orElse(null);
+                
+                if(categoriaExiste != null){
+                        Livro livro = new Livro(titulo, autorOuArtista, categoriaExiste);
+                        RepositorioLivro.livros.add(livro);
+                        RepositorioItem.itens.add(livro);
 
-                Livro livro = new Livro(titulo, autorOuArtista, categoria);
-                RepositorioLivro.livros.add(livro);
-                RepositorioItem.itens.add(livro);
+                        categoriaExiste.adicionarItens(livro);
+                        
+                        return "Livro adicionado com sucesso.";
+                } else {
+                        Categoria categoria = new Categoria(categoriaString);
 
-                categoria.adicionarItens(livro);
-                RepositorioCategoria.categorias.add(categoria);
+                        Livro livro = new Livro(titulo, autorOuArtista, categoria);
+                        RepositorioLivro.livros.add(livro);
+                        RepositorioItem.itens.add(livro);
 
-                return "Livro adicionado com sucesso.";
+                        categoria.adicionarItens(livro);
+                        RepositorioCategoria.categorias.add(categoria);
+
+                        return "Livro adicionado com sucesso.";
+                }
             }
         }
 
